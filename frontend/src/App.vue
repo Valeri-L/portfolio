@@ -7,13 +7,15 @@ import NavigationBar from './components/NavigationBar.vue';
 
 
 <template>
-  <header>
-    <NavigationBar />  
-  </header>
-  <h1>test</h1>
+  <div class="bg-ruby-500">
+    <header>
+      <NavigationBar />  
+    </header>
+    <h1>test</h1>
 
 
-  <AboutMe />
+    <AboutMe />
+  </div>
 </template>
 
 <style scoped>
