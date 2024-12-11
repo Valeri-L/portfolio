@@ -6,6 +6,7 @@ const colors = {
       100:"#282C30", //MAIN BG
       200:"#2F333A", //CONTENT BG CENTER
       300:"#F7F7F7", //TEXT
+      400:"#2E2E2E", //input fields
   },
   borders:{
       green:"#86c232",
