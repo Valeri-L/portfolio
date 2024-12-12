@@ -37,7 +37,7 @@ const count = ref(0)
 <template>
     <section class="achievements-section py-10">
         
-    <h2 class="text-3xl font-bold mb-8">Contact Me</h2>
+    <h2 class="text-3xl font-bold mb-8 ml-10">Contact Me</h2>
         
     <!-- <div class="border-solid rounded-lg border-2 border-borders-grey bg-sections-contact_me p-10"> -->
     <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 max-w-7xl mx-auto border border-borders-grey rounded-md p-4 bg-sections-contact_me">      
