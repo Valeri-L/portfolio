@@ -28,13 +28,17 @@ const colors = {
       purple:"#ce7fe4",
       green: "#48894A",
       yellow:"#C0B321",
-      red: "#D65050",
+      red: "#BE1C1C",
       blue:"#0A84FF"
   },
   table:{
     dark:"#1A1A1A",
     medium:"#2A2A2A",
     light:""
+  },
+  messages:{
+    error:"#A34343",
+    success:"#43A348"
   }
 }
 
