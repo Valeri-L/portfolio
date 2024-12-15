@@ -5,7 +5,7 @@
             <p class="">leetcode questions that i solved</p>
 
         </div>
-    <div class="lg:h-auto md:h-auto sm:h-[600px]">
+    <div class="xl:h-[440px] lg:h-[540px] md:h-[540px]  sm:h-[400px]">
       <table >
         <thead>
           <tr class="border-b border-borders-grey border-opacity-50">
@@ -99,7 +99,7 @@
   );
   
   const currentPage = ref(0);
-  const pageSize = 10;
+  const pageSize = 6;
   
   const currentQuestions = computed(() =>
     questions.value.slice(currentPage.value * pageSize, (currentPage.value + 1) * pageSize)

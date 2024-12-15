@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect,computed } from 'vue';
 
 // Form data
 const formData = ref({
@@ -18,10 +18,9 @@ const typingTimeout = ref(null);
 const typingEffectRunning = ref(false);
 
 
-
 const sendMessage = async () => {
   resetState(); // Reset previous state
-  console.log("sendMessage called, modal state reset");
+  // console.log("sendMessage called, modal state reset");
 
   try {
     const response = await fetch('YOUR_API_ENDPOINT', {
@@ -38,11 +37,13 @@ const sendMessage = async () => {
 
     const result = await response.json();
     alertMessage.value = "Message sent successfully!";
-    console.log("Success message set:", alertMessage.value);
+    alertType.value ='success';
+    // console.log("Success message set:", alertMessage.value);
   } catch (error) {
     console.error("Error in sendMessage:", error);
     alertMessage.value = "An error occurred. Please try again.";
-    console.log("Error message set:", alertMessage.value);
+    alertType.value ='error';
+    // console.log("Error message set:", alertMessage.value);
   }
 
 
@@ -50,22 +51,21 @@ const sendMessage = async () => {
 if (!typingEffectRunning.value && alertMessage.value) {
   typingEffect();
 } else {
-  console.warn("Typing effect skipped: Already running or no message.");
+  // console.warn("Typing effect skipped: Already running or no message.");
 }
 
 };
 
 
 
-
 const typingEffect = () => {
   if (typingEffectRunning.value) {
-    console.warn("Typing effect already running.");
+    // console.warn("Typing effect already running.");
     return;
   }
 
   typingEffectRunning.value = true;
-  console.log("Typing effect started");
+  // console.log("Typing effect started");
 
   const text = alertMessage.value;
   let i = 0;
@@ -73,31 +73,32 @@ const typingEffect = () => {
   alertMessage.value = ''; // Clear the message to start the animation
 
   const type = () => {
-    if (i < text.length && typingEffectRunning.value ) {
-        alertMessage.value += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-        } else {
-        console.log("Typing effect completed");
-        // typingEffectRunning = false;
+    if (i < text.length && typingEffectRunning.value) {
+      alertMessage.value += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    } else {
+      // console.log("Typing effect completed");
+      typingEffectRunning.value = false; // Reset flag here
+      // Automatically close modal after typing completes
+      setTimeout(() => {
+        resetState();
+        // console.log("Modal auto-closed");
+      }, 2000);
+    }
+  };
 
-        // Automatically close modal after typing completes
-        setTimeout(() => {
-            resetState();
-            console.log("Modal auto-closed");
-        }, 2000);
-        }
-    };
-  showAlert.value = true
+  showAlert.value = true;
   type();
 };
+
 
 
 const resetState = () => {
   showAlert.value = false;
   alertMessage.value = '';
   typingEffectRunning.value = false; // Reset typing effect state
-  console.log("resetState called");
+  // console.log("resetState called");
 };
 
 
@@ -107,12 +108,23 @@ const handleClose = () => {
   resetState();
 };
 
-// Watch for `showAlert` change to trigger typing effect
-watchEffect(() => {
-  if (showAlert.value && typing.value) {
-    typingEffect();
-  }
-});
+
+const buttonDisabled = computed(() => typingEffectRunning.value);
+
+const handleClick = () => {
+  if (buttonDisabled.value) return; // Prevent further clicks
+
+  // Disable the button
+  buttonDisabled.value = true;
+  console.log("Button clicked, starting animation...");
+
+  // Simulate animation duration (4 seconds)
+  setTimeout(() => {
+    buttonDisabled.value = false; // Re-enable the button
+    console.log("Animation completed, re-enabling button.");
+  }, 4000);
+};
+
 </script>
 
 
@@ -239,9 +251,9 @@ watchEffect(() => {
               </div>
 
               <!-- Submit Button -->
-              <button
+               <button
                 type="submit"
-                :disabled="showAlert"
+                :disabled="buttonDisabled"
                 class="w-full bg-buttons-success bg-opacity-80 text-primary-300 py-2 px-4 rounded-md shadow-md hover:bg-buttons-success focus:ring-0 focus:ring-borders-green focus:ring-opacity-50"
               >
                 Send Message
