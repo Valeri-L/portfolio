@@ -19,6 +19,11 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://0.0.0.0'
+]
 
 # Application definition
 
@@ -29,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'portfolio'
 ]
 
@@ -72,6 +78,24 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# REDIS CONFIGURATION AND VARIABLES
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Redis instance URL
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+        'KEY_PREFIX': 'leetcode',
+    }
+}
+
+
+LEETCODE_API_URL = "https://leetcode.com/graphql"
+
+LEETCODE_QUERY = """{ matchedUser(username: \"hayhuhin\") { username submitStats { acSubmissionNum { difficulty count } } } problemsetQuestionListV2 { questions { title difficulty status } } }"""
 
 
 # Password validation

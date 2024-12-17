@@ -51,8 +51,38 @@
   </template>
   
   <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed,onMounted } from 'vue';
   
+  
+  const LeetCodeData = ref("")
+
+
+// API Call for the Achievements data
+  const GetLeetCode = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/leetcode', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to load the leetcode data.');
+      }
+
+      const result = await response.json();
+      LeetCodeData.value = result
+    } catch (error) {
+      console.error("Error in sendMessage:", "");
+    }
+  }
+
+
+  onMounted(() => {
+  GetLeetCode();
+})
+
   const questions = ref(
     [
         { "title": "Two Sum", "solution": "#", "acceptance": "45%", "difficulty": "Easy" },
