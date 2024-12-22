@@ -20,25 +20,27 @@ DEBUG = os.getenv("DEBUG")
 ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://0.0.0.0'
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'portfolio'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,8 +97,25 @@ CACHES = {
 
 LEETCODE_API_URL = "https://leetcode.com/graphql"
 
-LEETCODE_QUERY = """{ matchedUser(username: \"hayhuhin\") { username submitStats { acSubmissionNum { difficulty count } } } problemsetQuestionListV2 { questions { title difficulty status } } }"""
-
+LEETCODE_QUERY = """{
+  matchedUser(username: \"hayhuhin\") {
+    username
+    submitStats {
+      acSubmissionNum {
+        difficulty
+        count
+      }
+    }
+  }
+  recentAcSubmissionList(username: \"hayhuhin\", limit: 1000) {
+    title
+    titleSlug
+    timestamp
+    statusDisplay
+    lang 
+    difficulty
+  }
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

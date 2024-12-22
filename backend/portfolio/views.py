@@ -7,14 +7,11 @@ from .models import ContactMessage
 from django.conf import settings
 from django.core.cache import cache
 from django.conf import settings
-
 import requests
-import json
+from portfolio.api_fetch import APIFetch
 
 
-# LeetCode GraphQL API endpoint and query
-LEETCODE_API_URL = settings.LEETCODE_API_URL
-LEETCODE_QUERY = settings.LEETCODE_QUERY
+
 
 
 
@@ -49,21 +46,19 @@ class MessageFormView(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
-
 class LeetCodeInfoView(APIView):
+
     def get(self, request):
         """
         Method:
-            GET request that called from the frontend.
+            GET request that is called from the frontend.
         
         Steps:
-            1.Define the cache key for LeetCode data)
-            2.Check if data is available in cache -> If data exists in cache, return it
-            3.If cache miss, fetch fresh data from LeetCode GraphQL -> Cache the data for 25 minutes (1500 seconds) -> Return the fresh data
-            4.Handle any errors from the LeetCode API -> if error from Leet Code -> Return 500 
+            1. Define the cache key for LeetCode data.
+            2. Check if data is available in cache -> If data exists in cache, return it.
+            3. If cache miss, fetch fresh data from LeetCode GraphQL -> Cache the data for 25 minutes (1500 seconds) -> Return the fresh data.
+            4. Handle any errors from the LeetCode API -> if error from LeetCode -> Return 500.
         """
-
-
 
         cache_key = "leetcode_data"
         cached_data = cache.get(cache_key)
@@ -73,15 +68,15 @@ class LeetCodeInfoView(APIView):
         
         else:
             try:
-                response = requests.post(LEETCODE_API_URL, json={"query":LEETCODE_QUERY})
-                print(response)
-                
-                response.raise_for_status()
-                data = response.json()
+                # Fetch the data and display the results
+                leetcode_data = APIFetch.fetch_leetcode_data()
+               
+                # Cache the filtered data for 25 minutes
+                cache.set(cache_key, leetcode_data, timeout=3600)
 
-                cache.set(cache_key, data, timeout=5)
-
-                return Response(data, status=status.HTTP_200_OK)
+                # Return the filtered data
+                return Response(leetcode_data, status=status.HTTP_200_OK)
 
             except requests.RequestException as e:
+                # Handle errors if the request fails
                 return Response({'error': 'Failed to fetch LeetCode data'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

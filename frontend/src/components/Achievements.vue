@@ -1,52 +1,64 @@
 <script setup>
 import LeetcodeTable from './leetcode_components/LeetcodeTable.vue';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted,watchEffect } from 'vue';
 import { CountUp } from 'countup.js';
 
-
+const isLoading = ref(true);
+const LeetCodeData = ref(null);
 const isVisible = ref(false);
 
-onMounted(() => {
-  const section = document.querySelector('.achievements-section');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-          startCounting();
-        } else {
-          isVisible.value = false;
-          resetCounting();
-        }
-      });
-    },
-    { threshold: 0.4 } // Trigger when 50% of the section is visible
-  );
-  observer.observe(section);
-});
+// Function to fetch data
+const GetLeetCode = async () => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/leetcode', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
+    if (!response.ok) {
+      throw new Error('Failed to load the leetcode data.');
+    }
+
+    const result = await response.json();
+    LeetCodeData.value = result; // Set the fetched data
+  } catch (error) {
+    console.error("Error in GetLeetCode:", error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// Function to start the count-up animation
 function startCounting() {
   const options = { duration: 5 };
 
-  const totalSolved = new CountUp('total-solved', 42,options);
-  const hard = new CountUp('hard', 18,options);
-  const medium = new CountUp('medium', 12,options);
-  const easy = new CountUp('easy', 12,options);
-  const commits2024 = new CountUp('commits-2024', 444,options);
-  const projects2024 = new CountUp('projects-2024', 4,options);
-  const commits2023 = new CountUp('commits-2023', 65,options);
-  const projects2023 = new CountUp('projects-2023', 2,options);
+  // Ensure LeetCodeData is available
+  if (LeetCodeData.value && LeetCodeData.value.difficulty_totals) {
+    const totals = LeetCodeData.value.difficulty_totals;
 
-  totalSolved.start();
-  hard.start();
-  medium.start();
-  easy.start();
-  commits2024.start();
-  projects2024.start();
-  commits2023.start();
-  projects2023.start();
+    const totalSolved = new CountUp('total-solved', totals.Easy + totals.Medium + totals.Hard || 0, options);
+    const hard = new CountUp('hard', totals.Hard || 0, options);
+    const medium = new CountUp('medium', totals.Medium || 0, options);
+    const easy = new CountUp('easy', totals.Easy || 0, options);
+    const commits2024 = new CountUp('commits-2024', 444, options);
+    const projects2024 = new CountUp('projects-2024', 4, options);
+    const commits2023 = new CountUp('commits-2023', 65, options);
+    const projects2023 = new CountUp('projects-2023', 2, options);
+
+    totalSolved.start();
+    hard.start();
+    medium.start();
+    easy.start();
+    commits2024.start();
+    projects2024.start();
+    commits2023.start();
+    projects2023.start();
+  }
 }
 
+// Function to reset the count values
 function resetCounting() {
   document.getElementById('total-solved').innerText = '0';
   document.getElementById('hard').innerText = '0';
@@ -58,6 +70,33 @@ function resetCounting() {
   document.getElementById('projects-2023').innerText = '0';
 }
 
+// Using IntersectionObserver to trigger counting when section is visible
+onMounted(() => {
+  // Fetch LeetCode data
+  GetLeetCode();
+
+  // Wait until data is fetched before proceeding
+  watchEffect(() => {
+    if (!isLoading.value && LeetCodeData.value) {
+      const section = document.querySelector('.achievements-section');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              isVisible.value = true;
+              startCounting(); // Start the count once the section is visible and data is loaded
+            } else {
+              isVisible.value = false;
+              resetCounting(); // Reset counting if not visible
+            }
+          });
+        },
+        { threshold: 0.4 } // Trigger when 40% of the section is visible
+      );
+      observer.observe(section);
+    }
+  });
+});
 
 </script>
 
@@ -67,8 +106,11 @@ function resetCounting() {
     <h2 class="text-3xl font-bold mb-8 ml-10">Achievements</h2>
     <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 gap-4 max-w-7xl mx-auto border border-borders-green rounded-md p-4 bg-sections-achievements">
       <!-- First Column -->
-      <div class="md:col-span-2 flex justify-center items-center ">
-        <LeetcodeTable />
+      <div v-if="isLoading" class="loading-placeholder">
+        <p>Loading Leetcode Data...</p>
+      </div>
+      <div v-else-if="LeetCodeData.completed_questions" class="md:col-span-2 flex justify-center items-center">
+        <LeetcodeTable :questions="LeetCodeData.completed_questions" />
       </div>
 
 
