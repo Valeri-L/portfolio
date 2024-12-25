@@ -17,12 +17,14 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 
 class MessageFormView(APIView):
-    throttle_classes = [AnonRateThrottle]
+    # throttle_classes = [AnonRateThrottle]
 
     def post(self, request):
         data = request.data
         try:
             # Save message to the database
+            
+
             message = ContactMessage.objects.create(
                 name=data['name'],
                 email=data['email'],
@@ -39,13 +41,14 @@ class MessageFormView(APIView):
                 Phone: {message.phone or 'Not provided'}
                 Message: {message.message}
                 """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL],
-                fail_silently=False
-            )
-
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
+            
             return Response({'success': 'Message sent successfully!'}, status=status.HTTP_200_OK)
         except Exception as e:
+            print(e)
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
@@ -62,7 +65,6 @@ class LeetCodeInfoView(APIView):
             3. If cache miss, fetch fresh data from LeetCode GraphQL -> Cache the data for 25 minutes (1500 seconds) -> Return the fresh data.
             4. Handle any errors from the LeetCode API -> if error from LeetCode -> Return 500.
         """
-
         cache_key = "leetcode_data"
         cached_data = cache.get(cache_key)
 

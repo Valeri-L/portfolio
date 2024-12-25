@@ -1,6 +1,6 @@
 <script setup>
 import AboutMe from './components/AboutMe.vue';
-import Achievements from './components/achievements.vue';
+import Achievements from './components/Achievements.vue';
 import ContactMe from './components/ContactMe.vue';
 import NavigationBar from './components/NavigationBar.vue';
 import Projects from './components/Projects.vue';
