@@ -9,6 +9,7 @@ from django.core.cache import cache
 from django.conf import settings
 import requests
 from portfolio.api_fetch import APIFetch
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 
 
@@ -16,6 +17,8 @@ from portfolio.api_fetch import APIFetch
 
 
 class MessageFormView(APIView):
+    throttle_classes = [AnonRateThrottle]
+
     def post(self, request):
         data = request.data
         try:

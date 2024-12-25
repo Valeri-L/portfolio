@@ -17,6 +17,15 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',  # 5 requests per minute for anonymous users
+        'user': '5/minute',  # 10 requests per minute for authenticated users
+    },
+}
+
 ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = [
