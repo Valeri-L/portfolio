@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = (True if  os.getenv("DEBUG").lower() == "true" else False )
 
 
 
