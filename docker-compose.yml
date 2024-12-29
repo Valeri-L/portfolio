@@ -5,6 +5,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+
+    image: levinsonvaleri/portfolio_frontend:latest
+    platform: "linux/amd64"
     ports:
       - "3000:80"
     depends_on:
@@ -14,6 +17,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: levinsonvaleri/portfolio_backend:latest
+    platform: "linux/amd64"
+
     ports:
       - "8000:8000"
     volumes:
