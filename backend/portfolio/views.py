@@ -17,7 +17,7 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 
 class MessageFormView(APIView):
-    # throttle_classes = [AnonRateThrottle]
+    throttle_classes = [AnonRateThrottle]
 
     def post(self, request):
         data = request.data
@@ -53,6 +53,7 @@ class MessageFormView(APIView):
         
 
 class LeetCodeInfoView(APIView):
+    throttle_classes = [AnonRateThrottle]
 
     def get(self, request):
         """

@@ -21,16 +21,21 @@ DEBUG = (True if  os.getenv("DEBUG").lower() == "true" else False )
 
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '5/minute',  # 5 requests per minute for anonymous users
-        'user': '5/minute',  # 10 requests per minute for authenticated users
+        'anon': '30/minute',  # 30 requests per minute for anonymous users
+        'user': '0/minute',  # 10 requests per minute for authenticated users
     },
 }
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+ALLOWED_HOSTS = [
+    os.getenv("ALLOWED_HOSTS"),
+    # "localhost",  #only for development
+    # "127.0.0.1"   #only for development
+    ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    os.getenv("CORS_ALLOWED_ORIGINS"),
+    # "http://127.0.0.1:3000", #only for development
+    # "http://localhost:3000"  #only for development
 ]
 
 

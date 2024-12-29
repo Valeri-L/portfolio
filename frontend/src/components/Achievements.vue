@@ -3,12 +3,62 @@ import LeetcodeTable from './leetcode_components/LeetcodeTable.vue';
 import { ref, onMounted,watchEffect } from 'vue';
 import { CountUp } from 'countup.js';
 
+
+
+
+// functions to save the result of the api in local storage
+function saveToLocalStorage(key, data, ttl) {
+    const expiry = Date.now() + ttl; // Set expiration time (in milliseconds)
+    const item = {
+        data,
+        expiry,
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+}
+
+function getFromLocalStorage(key) {
+    const itemStr = localStorage.getItem(key);
+
+    if (!itemStr) {
+        return null; // Key doesn't exist
+    }
+
+    const item = JSON.parse(itemStr);
+    const now = Date.now();
+
+    // Check if the item is expired
+    if (now > item.expiry) {
+        localStorage.removeItem(key); // Remove expired item
+        return null;
+    }
+
+    return item.data; // Return the data
+}
+
+
+
 const isLoading = ref(true);
 const LeetCodeData = ref(null);
 const isVisible = ref(false);
 
 // Function to fetch data
 const GetLeetCode = async () => {
+
+  // checking if the data already exists in the local storage
+  const cacheKey = "LeetCode_LS";
+  const cacheTTL = 24 * 60 * 1000; // 24 minutes in milliseconds
+
+  // Check localStorage first
+  const cachedData = getFromLocalStorage(cacheKey);
+
+  if (cachedData) {
+    console.log("Using cached data");
+    LeetCodeData.value = cachedData;
+    isLoading.value = false;
+    return;
+  }
+
+  // portfolio.valerilevinson.com
   try {
     const response = await fetch('http://127.0.0.1:8000/api/leetcode', {
       method: 'GET',
@@ -23,6 +73,12 @@ const GetLeetCode = async () => {
 
     const result = await response.json();
     LeetCodeData.value = result; // Set the fetched data
+
+    // Save the data to localStorage with expiration
+    saveToLocalStorage(cacheKey, result, cacheTTL);
+
+    // this.data = result;
+
   } catch (error) {
     console.error("Error in GetLeetCode:", error);
   } finally {
