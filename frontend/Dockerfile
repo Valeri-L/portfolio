@@ -1,5 +1,5 @@
 # Dockerfile for the frontend
-FROM node:18 as build
+FROM node:18 as frontend
 
 WORKDIR /app
 
@@ -13,14 +13,18 @@ RUN npm install
 COPY . .
 
 # Build the application
+
 RUN npm run build
 
-# Use a lightweight web server for static files
+# # Use a lightweight web server for static files
 FROM nginx:stable-alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=frontend /app/dist /usr/share/nginx/html
+
+COPY /nginx/nginx.conf /etc/nginx/conf.d
 
 # Expose port
 EXPOSE 3000
+
 
 CMD ["nginx", "-g", "daemon off;"]
