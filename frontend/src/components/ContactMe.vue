@@ -23,7 +23,7 @@ const sendMessage = async () => {
   // console.log("sendMessage called, modal state reset");
 
   try {
-    const response = await fetch('portfolio.valerilevinson.com/api/message', {
+    const response = await fetch('www.portfolio.valerilevinson.com/api/message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
