@@ -1,5 +1,44 @@
 <script setup>
-import { ref, watchEffect,computed } from 'vue';
+import { ref, computed,onMounted } from 'vue';
+
+
+
+// Button disabled state
+const buttonDisabled = ref(false)
+
+
+const loadRecaptchaScript = () => {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById('recaptcha-script')) {
+      resolve();
+      return;
+    }
+
+    const recaptchaScript = document.createElement('script');
+    recaptchaScript.id = 'recaptcha-script';
+    recaptchaScript.src = 'https://www.google.com/recaptcha/api.js?render=6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc';
+    recaptchaScript.onload = resolve;
+    recaptchaScript.onerror = () => reject(new Error('Failed to load reCAPTCHA script.'));
+    document.head.appendChild(recaptchaScript);
+  });
+};
+
+
+const initializeRecaptcha = async () => {
+  await loadRecaptchaScript(); // Ensure the script is loaded
+  return new Promise((resolve) => {
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(() => resolve());
+    } else {
+      reject(new Error('grecaptcha is not defined.'));
+    }
+  });
+};
+
+onMounted(() => {
+  loadRecaptchaScript();
+});
+
 
 // Form data
 const formData = ref({
@@ -13,23 +52,39 @@ const formData = ref({
 const showAlert = ref(false);
 const alertType = ref('');
 const alertMessage = ref('');
-const typing = ref(false);
-const typingTimeout = ref(null);
 const typingEffectRunning = ref(false);
 
-
+// Send Message function
 const sendMessage = async () => {
+  buttonDisabled.value = true
   resetState(); // Reset previous state
-  // console.log("sendMessage called, modal state reset");
+
+  // Create an AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 5000); // Timeout after 3 seconds
 
   try {
+    // Request reCAPTCHA token
+    const token = await grecaptcha.execute('6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc', { action: 'submit' });
+
+    if (!token) {
+      throw new Error('Failed to get reCAPTCHA token.');
+    }
+    
+    // Include the token in the payload
     const response = await fetch('http://portfolio.valerilevinson.com/api/message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData.value ),
+      body: JSON.stringify({
+        ...formData.value,
+        recaptchaToken: token, // Add reCAPTCHA token to the payload
+      }),
+      signal: controller.signal, // Attach the AbortController signal
     });
+
+    clearTimeout(timeoutId); // Clear the timeout if the request succeeds
 
     if (!response.ok) {
       throw new Error('Failed to send message.');
@@ -37,36 +92,42 @@ const sendMessage = async () => {
 
     const result = await response.json();
     alertMessage.value = "Message sent successfully!";
-    alertType.value ='success';
-    // console.log("Success message set:", alertMessage.value);
+    alertType.value = 'success';
   } catch (error) {
-    console.error("Error in sendMessage:", error);
-    alertMessage.value = "An error occurred. Please try again.";
-    alertType.value ='error';
-    // console.log("Error message set:", alertMessage.value);
+    clearTimeout(timeoutId); // Ensure timeout is cleared in case of any error
+
+    if (error.name === 'AbortError') {
+      console.error("Request timed out:", error);
+      alertMessage.value = "server is unreachable. Please try again later.";
+    } else {
+      console.error("Error in sendMessage:", error);
+      alertMessage.value = "An error occurred. Please try again.";
+    }
+    alertType.value = 'error';
   }
 
-
-  // Avoid duplicate typing effect invocation
-if (!typingEffectRunning.value && alertMessage.value) {
-  typingEffect();
-} else {
-  // console.warn("Typing effect skipped: Already running or no message.");
-}
-
+  // Invoke typing effect if needed
+  if (!typingEffectRunning.value && alertMessage.value) {
+    typingEffect();
+    //the whole point here is to close the typing effect no matter what at the end.
+    setTimeout(()=>{
+      resetState()
+      if(alertType.value === 'success'){
+        buttonDisabled.value = false
+        location.reload()
+      }
+      if(alertType.value === 'error'){
+        buttonDisabled.value = false
+      }
+    },4000)
+  }
 };
 
-
-
+// Typing effect for alert message
 const typingEffect = () => {
-  if (typingEffectRunning.value) {
-    // console.warn("Typing effect already running.");
-    return;
-  }
+  if (typingEffectRunning.value) return;
 
   typingEffectRunning.value = true;
-  // console.log("Typing effect started");
-
   const text = alertMessage.value;
   let i = 0;
   const speed = 80; // Typing speed
@@ -78,13 +139,7 @@ const typingEffect = () => {
       i++;
       setTimeout(type, speed);
     } else {
-      // console.log("Typing effect completed");
-      typingEffectRunning.value = false; // Reset flag here
-      // Automatically close modal after typing completes
-      setTimeout(() => {
-        resetState();
-        // console.log("Modal auto-closed");
-      }, 2000);
+      typingEffectRunning.value = false; // Reset flag
     }
   };
 
@@ -92,16 +147,12 @@ const typingEffect = () => {
   type();
 };
 
-
-
+// Reset state
 const resetState = () => {
   showAlert.value = false;
-  alertMessage.value = '';
+  alertMessage.value = false;
   typingEffectRunning.value = false; // Reset typing effect state
-  // console.log("resetState called");
 };
-
-
 
 // Modal close handler
 const handleClose = () => {
@@ -109,24 +160,7 @@ const handleClose = () => {
 };
 
 
-const buttonDisabled = computed(() => typingEffectRunning.value);
-
-const handleClick = () => {
-  if (buttonDisabled.value) return; // Prevent further clicks
-
-  // Disable the button
-  buttonDisabled.value = true;
-  console.log("Button clicked, starting animation...");
-
-  // Simulate animation duration (4 seconds)
-  setTimeout(() => {
-    buttonDisabled.value = false; // Re-enable the button
-    console.log("Animation completed, re-enabling button.");
-  }, 4000);
-};
-
 </script>
-
 
 <template>
   <section class="py-10">
@@ -138,7 +172,7 @@ const handleClick = () => {
         class="border border-primary-300 border-opacity-50 p-14 rounded-md shadow-lg max-w-lg text-center" 
         @click.stop
         :class="alertType === 'error' ? 'bg-messages-error' : 'bg-messages-success' "
-        >
+      >
         <p class="text-xl font-pixelify font-semibold text-primary-300">{{ alertMessage }}</p>
       </div>
     </div>
@@ -188,7 +222,6 @@ const handleClick = () => {
               <p class="pl-3 capitalize">+972 0552251273</p>
             </a>
           </div>
-
         </div>
       </div>
 
@@ -252,10 +285,13 @@ const handleClick = () => {
 
               <!-- Submit Button -->
                <button
-                type="submit"
-                :disabled="buttonDisabled"
-                class="w-full bg-buttons-success bg-opacity-80 text-primary-300 py-2 px-4 rounded-md shadow-md hover:bg-buttons-success focus:ring-0 focus:ring-borders-green focus:ring-opacity-50"
+               :disabled="buttonDisabled"
+                data-callback="sendMessage"
+                data-action="submit"
+                class="g-recaptcha flex justify-center gap-4 w-full bg-buttons-success bg-opacity-80 text-primary-300 py-2 px-4 rounded-md shadow-md hover:bg-buttons-success focus:ring-0 focus:ring-borders-green focus:ring-opacity-50"
               >
+              <div v-if="buttonDisabled" class="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin">
+              </div>
                 Send Message
               </button>
             </form>

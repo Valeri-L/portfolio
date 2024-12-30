@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (True if  os.getenv("DEBUG").lower() == "true" else False )
 
@@ -28,14 +29,15 @@ REST_FRAMEWORK = {
 
 ALLOWED_HOSTS = [
     os.getenv("ALLOWED_HOSTS"),
-    # "localhost",  #only for development
-    # "127.0.0.1"   #only for development
+    os.getenv("ALLOWED_HOSTS_99"),
+    "localhost",  #only for development
+    "127.0.0.1"   #only for development
     ]
 
 CORS_ALLOWED_ORIGINS = [
     os.getenv("CORS_ALLOWED_ORIGINS"),
-    # "http://127.0.0.1:3000", #only for development
-    # "http://localhost:3000"  #only for development
+    "http://127.0.0.1:3000", #only for development
+    "http://localhost:3000"  #only for development
 ]
 
 

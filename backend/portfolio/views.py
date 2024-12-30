@@ -21,14 +21,30 @@ class MessageFormView(APIView):
 
     def post(self, request):
         data = request.data
-        try:
-            # Save message to the database
-            
 
+        # Verify reCAPTCHA token
+        recaptcha_token = data.get('recaptchaToken')
+        if not recaptcha_token:
+            return Response({'error': 'reCAPTCHA token is missing.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        recaptcha_secret = settings.RECAPTCHA_SECRET_KEY  # Set this in your settings
+        recaptcha_url = "https://www.google.com/recaptcha/api/siteverify"
+
+        try:
+            recaptcha_response = requests.post(recaptcha_url, data={
+                'secret': recaptcha_secret,
+                'response': recaptcha_token,
+            })
+            recaptcha_result = recaptcha_response.json()
+
+            if not recaptcha_result.get('success'):
+                return Response({'error': 'Invalid reCAPTCHA token.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Save message to the database
             message = ContactMessage.objects.create(
                 name=data['name'],
                 email=data['email'],
-                phone=data.get('phone', ''),#phone is optional
+                phone=data.get('phone', ''),  # phone is optional
                 message=data['message']
             )
 
@@ -41,16 +57,18 @@ class MessageFormView(APIView):
                 Phone: {message.phone or 'Not provided'}
                 Message: {message.message}
                 """,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
-            
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+
             return Response({'success': 'Message sent successfully!'}, status=status.HTTP_200_OK)
+
         except Exception as e:
             print(e)
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+
 
 class LeetCodeInfoView(APIView):
     throttle_classes = [AnonRateThrottle]

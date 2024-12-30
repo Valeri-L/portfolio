@@ -165,7 +165,8 @@ onMounted(() => {
       <div v-if="isLoading" class="loading-placeholder">
         <p>Loading Leetcode Data...</p>
       </div>
-      <div v-else-if="LeetCodeData.completed_questions" class="md:col-span-2 flex justify-center items-center">
+
+      <div v-else-if="LeetCodeData" class="md:col-span-2 flex justify-center items-center">
         <LeetcodeTable :questions="LeetCodeData.completed_questions" />
       </div>
 
