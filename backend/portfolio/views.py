@@ -10,7 +10,7 @@ from django.conf import settings
 import requests
 from portfolio.api_fetch import APIFetch
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-
+from serializers import SendMessageSerializer
 
 
 
@@ -41,29 +41,33 @@ class MessageFormView(APIView):
                 return Response({'error': 'Invalid reCAPTCHA token.'}, status=status.HTTP_400_BAD_REQUEST)
 
             # Save message to the database
-            message = ContactMessage.objects.create(
-                name=data['name'],
-                email=data['email'],
-                phone=data.get('phone', ''),  # phone is optional
-                message=data['message']
-            )
+            serializer = SendMessageSerializer(data=data)
+            if serializer.is_valid():
+                message = ContactMessage.objects.create(
+                    name=data['name'],
+                    email=data['email'],
+                    phone=data.get('phone', ''),  # phone is optional
+                    message=data['message']
+                )
 
-            # Send email notification
-            send_mail(
-                subject=f"New Contact Form Submission from {message.name}",
-                message=f"""
-                Name: {message.name}
-                Email: {message.email}
-                Phone: {message.phone or 'Not provided'}
-                Message: {message.message}
-                """,
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[settings.EMAIL_HOST_USER],
-                fail_silently=False,
-            )
+                # Send email notification
+                send_mail(
+                    subject=f"New Contact Form Submission from {message.name}",
+                    message=f"""
+                    Name: {message.name}
+                    Email: {message.email}
+                    Phone: {message.phone or 'Not provided'}
+                    Message: {message.message}
+                    """,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[settings.EMAIL_HOST_USER],
+                    fail_silently=False,
+                )
 
-            return Response({'success': 'Message sent successfully!'}, status=status.HTTP_200_OK)
-
+                return Response({'success': 'Message sent successfully!'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error':'invalid fields received'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
+            
         except Exception as e:
             print(e)
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
