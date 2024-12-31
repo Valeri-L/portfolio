@@ -10,7 +10,7 @@ from django.conf import settings
 import requests
 from portfolio.api_fetch import APIFetch
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-from serializers import SendMessageSerializer
+from portfolio.serializers import SendMessageSerializer
 
 
 
