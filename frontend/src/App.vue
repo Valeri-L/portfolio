@@ -51,5 +51,4 @@ import WhatIDo from './components/WhatIDo.vue';
 </template>
 
 <style scoped>
-/* Optional: You can adjust global or section-specific styles here */
 </style>

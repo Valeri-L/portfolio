@@ -72,7 +72,7 @@ const sendMessage = async () => {
     }
     
     // Include the token in the payload
-    const response = await fetch('http://portfolio.valerilevinson.com/api/message', {
+    const response = await fetch('https://portfolio.valerilevinson.com/api/message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

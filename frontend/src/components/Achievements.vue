@@ -52,7 +52,6 @@ const GetLeetCode = async () => {
   const cachedData = getFromLocalStorage(cacheKey);
 
   if (cachedData) {
-    console.log("Using cached data");
     LeetCodeData.value = cachedData;
     isLoading.value = false;
     return;
@@ -60,7 +59,7 @@ const GetLeetCode = async () => {
 
   // portfolio.valerilevinson.com
   try {
-    const response = await fetch('http://portfolio.valerilevinson.com/api/leetcode', {
+    const response = await fetch('https://portfolio.valerilevinson.com/api/leetcode', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
