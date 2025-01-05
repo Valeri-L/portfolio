@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+REDIS_LOCATION = os.getenv('REDIS_LOCATION')
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
 RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -102,7 +103,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis-14727.c274.us-east-1-3.ec2.redns.redis-cloud.com:14727',
+        'LOCATION': REDIS_LOCATION,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             'USERNAME':'default',
@@ -115,7 +116,6 @@ CACHES = {
 
 
 LEETCODE_API_URL = "https://leetcode.com/graphql"
-
 LEETCODE_QUERY = """{
   matchedUser(username: \"hayhuhin\") {
     username
@@ -135,6 +135,7 @@ LEETCODE_QUERY = """{
     difficulty
   }
 }"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
