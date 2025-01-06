@@ -70,7 +70,8 @@ const sendMessage = async () => {
     if (!token) {
       throw new Error('Failed to get reCAPTCHA token.');
     }
-    
+
+    // 'https://portfolio.valerilevinson.com/api/message'
     // Include the token in the payload
     const response = await fetch('https://portfolio.valerilevinson.com/api/message', {
       method: 'POST',

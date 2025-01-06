@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import colors from '../assets/styles/main';
+// import colors from '../assets/styles/main';
 
 const activeButton = ref(null);
 
@@ -28,7 +28,7 @@ const button_sx = `bg-transparent border-none hover:underline underline-offset-8
 
 <template>
 
-  <nav class="fixed w-full top-0 left-0 z-50 font-pixelify border-b border-text-red border-opacity-30 bg-primary-100 bg-opacity-95">
+  <nav class="fixed w-full top-0 left-0 z-50 font-pixelify border-b border-text-red border-opacity-30 bg-primary-100 bg-opacity-80">
     <div class="flex items-center justify-between px-6 py-4">
         
       <div class="flex items-center gap-8">

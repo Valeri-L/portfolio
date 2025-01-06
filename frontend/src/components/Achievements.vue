@@ -57,7 +57,7 @@ const GetLeetCode = async () => {
     return;
   }
 
-  // portfolio.valerilevinson.com
+  // 'https://portfolio.valerilevinson.com/api/leetcode'
   try {
     const response = await fetch('https://portfolio.valerilevinson.com/api/leetcode', {
       method: 'GET',
