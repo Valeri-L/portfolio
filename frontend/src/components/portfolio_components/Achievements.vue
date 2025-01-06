@@ -1,5 +1,5 @@
 <script setup>
-import LeetcodeTable from './leetcode_components/LeetcodeTable.vue';
+import LeetcodeTable from '../leetcode_components/LeetcodeTable.vue';
 import { ref, onMounted,watchEffect } from 'vue';
 import { CountUp } from 'countup.js';
 
