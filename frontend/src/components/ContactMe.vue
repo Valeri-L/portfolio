@@ -177,14 +177,16 @@ const handleClose = () => {
         <p class="text-xl font-pixelify font-semibold text-primary-300">{{ alertMessage }}</p>
       </div>
     </div>
-
+    <!-- alert itself-->
     <div :class="{'blur-sm': showAlert}" class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 max-w-7xl mx-auto border border-borders-grey rounded-md p-4 bg-sections-contact_me">
-      <!-- First Column (Largest) -->
+
+    <!-- First Column (Largest - acts as a title) -->
       <div class="first_column m-6 lg:border-r border-borders-grey border-opacity-30">
         <h3 class="uppercase underline mb-4">social media</h3>
 
-        <div class="flex flex-col gap-3">
-          <div>
+        <!-- the social media buttons-->
+        <div class="flex flex-col gap-8 w-[200px] mt-16 ml-4">
+          <div >
             <a href="#" target="_blank" aria-label="linkedin" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/linkedin.svg" alt="Linkedin" class="w-6 h-6" >
@@ -210,7 +212,7 @@ const handleClose = () => {
                 <img src="/facebook1.svg" alt="facebook" class="w-6 h-6" >
                 <h3 class="pt-1 uppercase">facebook</h3>
               </div>
-              <p class="pl-3 capitalize">my facebook</p>
+              <p class="pl-3 capitalize">currently no facebook</p>
             </a>
           </div>
 
