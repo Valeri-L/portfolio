@@ -23,7 +23,7 @@ const scrollTo = (section) => {
   }
 };
 
-const button_sx = `bg-transparent border-none hover:underline underline-offset-8 decoration-text-purple focus:outline-none focus:ring-0`;
+const button_sx = `bg-transparent text-primary-300 hover:text-borders-grey underline border-none hover:no-underline underline-offset-8 decoration-text-purple focus:outline-none focus:ring-0`;
 </script>
 
 <template>
@@ -34,18 +34,13 @@ const button_sx = `bg-transparent border-none hover:underline underline-offset-8
       <div class="flex items-center gap-8">
       <!-- logo -->
         <div class="text-xl">
-            <button :class="button_sx">Valeri Levinson</button><!-- logo on the top left side -->
-        </div>
+            <a href="/" class="">
+              <button :class="button_sx">go back</button><!-- logo on the top left side -->
+            </a>
+            </div>
 
         </div>
-            <div class="flex space-x-6">
-            <button
-                :class="`${button_sx} ${activeButton === 'about' ? 'no-underline' : ''}`"
-                @click="scrollTo('about-me')"
-            >
-                About Me
-            </button>
-            </div>
+            
         </div>
   </nav>
 

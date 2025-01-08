@@ -11,7 +11,7 @@
 
     // Map the parameter to specific components
     const documentationComponents = {
-        valar_crm: InDevelopment, // DocCRM,
+        valar_crm: DocCRM, // DocCRM,
         top_down: InDevelopment, //DocTopDown,
         weather_api: InDevelopment, //DocWeatherAPI,
       };
@@ -27,7 +27,6 @@
 
 
 <template>
-    {{ console.log("documentation page") }}
     <div>
         <header class="fixed top-0 left-0 w-full z-10">
         <DocNavigationBar />

@@ -14,9 +14,9 @@ import WhatIDo from './portfolio_components/WhatIDo.vue';
   <header class="fixed top-0 left-0 w-full z-10">
     <NavigationBar />
   </header>
+  
   <!-- Content of the page -->
   <div >
-    <!-- Add padding-top to avoid overlap with fixed navbar -->
 
     <!-- About Me Section -->
     <section id="about-me" class="pt-0">
