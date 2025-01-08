@@ -6,7 +6,7 @@ const projects = ref([
   {
     image: 'valar_crm',
     title: 'valar CRM',
-    text: 'with PostgreSQL, MySQL, and MongoDB databases. I also use tools like Docker, AWS, and NGINX to ensure secure, efficient, and reliable application deployment.',
+    text: 'A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights.',
     button_text:"see demo",
     url:"https://crm.valerilevinson.com",
     documentation:"/documentation/valar_crm"
@@ -14,7 +14,7 @@ const projects = ref([
   {
     image: 'weather_api',
     title: 'weather API comparison',
-    text: 'with PostgreSQL, MySQL, and MongoDB databases. I also use tools like Docker, AWS, and NGINX to ensure secure, efficient, and reliable application deployment.',
+    text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate. This tool emphasizes the importance of verifying data sources.',
     button_text:"view on GIT",
     url:"https://github.com/hayhuhin/weather_API_representation",
     documentation:"/documentation/weather_api"
@@ -22,7 +22,7 @@ const projects = ref([
   {
     image: 'top_down',
     title: 'top down fighter',
-    text: 'with PostgreSQL, MySQL, and MongoDB databases. I also use tools like Docker, AWS, and NGINX to ensure secure, efficient, and reliable application deployment.',
+    text: 'A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, all brought to life with beautifully crafted free pixel art assets.',
     button_text:"view on GIT",
     url:"https://github.com/hayhuhin/fighter",
     documentation:"/documentation/top_down"

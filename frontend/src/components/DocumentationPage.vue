@@ -32,7 +32,7 @@
         <DocNavigationBar />
         </header>
 
-        <div class="bg-primary-200 mx-4 md:mx-10 lg:mx-20 md:p-0 rounded-lg shadow-lg mt-[180px]">
+        <div class="mt-[180px]">
             <!-- <h1>Documentation Page</h1> -->
             <component :is="component" />
         </div>
