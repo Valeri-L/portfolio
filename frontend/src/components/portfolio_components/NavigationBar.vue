@@ -42,13 +42,13 @@ const button_sx = `bg-transparent border-none hover:underline underline-offset-8
           <a href="https://github.com/hayhuhin" target="_blank" aria-label="GitHub" class="hover:text-gray-400">
             <img src="/github.svg" alt="GitHub" class="w-6 h-6" >
           </a>
-          <a href="#" target="_blank" aria-label="linkedin" class="hover:text-gray-400">
+          <a target="_blank" aria-label="linkedin" class="hover:text-gray-400">
             <img src="/linkedin.svg" alt="Linkedin" class="w-6 h-6" >
           </a>
-          <a href="mailto:hayhuhin.new@gmail.com" aria-label="Email" class="hover:text-gray-400">
+          <a href="mailto:levinsonvaleri@gmail.com" aria-label="Email" class="hover:text-gray-400">
             <img src="/email.svg" alt="GitHub" class="w-6 h-6" >
           </a> 
-          <a href="https://facebook.com/" target="_blank" aria-label="facebook" class="hover:text-gray-400">
+          <a target="_blank" aria-label="facebook" class="hover:text-gray-400">
             <img src="/facebook1.svg" alt="Facebook" class="w-6 h-6" >
           </a> 
         </div>
