@@ -187,12 +187,12 @@ const handleClose = () => {
         <!-- the social media buttons-->
         <div class="flex flex-col gap-8 w-[200px] mt-16 ml-4">
           <div >
-            <a href="#" target="_blank" aria-label="linkedin" class="hover:text-gray-300 text-primary-300">
+            <a target="_blank" aria-label="linkedin" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/linkedin.svg" alt="Linkedin" class="w-6 h-6" >
                 <h3 class="pt-1 uppercase">linkedin</h3>
               </div>
-              <p class="pl-3 capitalize">my linkedin</p>
+              <p class="pl-3 capitalize">currently no linkedin</p>
             </a>
           </div>
 
@@ -207,7 +207,7 @@ const handleClose = () => {
           </div>
 
           <div>
-            <a href="#" aria-label="facebook" class="hover:text-gray-300 text-primary-300">
+            <a aria-label="facebook" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/facebook1.svg" alt="facebook" class="w-6 h-6" >
                 <h3 class="pt-1 uppercase">facebook</h3>
@@ -217,12 +217,24 @@ const handleClose = () => {
           </div>
 
           <div>
-            <a href="#" aria-label="phone call" class="hover:text-gray-300 text-primary-300">
+            <a  aria-label="phone call" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2">
                 <img src="/phone_call.svg" alt="phone call" class="w-6 h-6" >
                 <h3 class="pt-1 uppercase">phone number</h3>
               </div>
               <p class="pl-3 capitalize">+972 0552251273</p>
+            </a>
+          </div>
+
+          <div>
+            <a 
+              href="/valerilevinson_CV.pdf" 
+              download="CV.pdf"
+              class="hover:text-gray-300 text-primary-300">
+              <div class="flex gap-2 ">
+                <img src="/cv.svg" alt="cv_image" class="w-6 h-6" >
+                <h3 class="pt-1 uppercase">Download CV</h3>
+              </div>
             </a>
           </div>
         </div>
