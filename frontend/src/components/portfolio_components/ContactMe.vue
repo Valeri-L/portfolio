@@ -197,12 +197,12 @@ const handleClose = () => {
           </div>
 
           <div>
-            <a href="mailto:hayhuhin.new@gmail.com" aria-label="Email" class="hover:text-gray-300 text-primary-300">
+            <a href="mailto:levinsonvaleri@gmail.com" aria-label="Email" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/email.svg" alt="email" class="w-6 h-6" >
                 <h3 class="pt-1 uppercase">email</h3>
               </div>
-              <p class="pl-3">valerilevinson@gmail.com</p>
+              <p class="pl-3">levinsonvaleri@gmail.com</p>
             </a>
           </div>
 
