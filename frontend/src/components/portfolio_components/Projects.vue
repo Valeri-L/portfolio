@@ -44,7 +44,6 @@ const projects = ref([
         <a
           class="text-primary-300 font-pixelify underline capitalize text-xs hover:text-text-green"
           :href="item.documentation"
-          target="_blank"
           >
           Read Documentation
         </a>
@@ -65,7 +64,7 @@ const projects = ref([
           <!-- Description -->
           <p class="text-primary-300 text-center mx-4 max-w-xl leading-relaxed">{{ item.text }}</p>
           <!-- item button -->
-          <a class="m-4" :href="item.url" target="_blank">
+          <a class="m-4" :href="item.url" >
             <button class="bg-buttons-success font-pixelify  text-primary-300 capitalize py-1 focus:outline-none focus:ring-0">{{ item.button_text }}</button>
           </a>
         </div>

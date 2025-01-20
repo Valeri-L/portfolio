@@ -12,7 +12,7 @@
     // Map the parameter to specific components
     const documentationComponents = {
         valar_crm: DocCRM, // DocCRM,
-        top_down: InDevelopment, //DocTopDown,
+        top_down: DocTopDown, //DocTopDown,
         weather_api: InDevelopment, //DocWeatherAPI,
       };
     

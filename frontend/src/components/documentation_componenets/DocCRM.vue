@@ -40,6 +40,7 @@
         <p class="text_regular">This approach taught me an invaluable lesson: planning is the cornerstone of building complex applications. While coding can account for 20% of the effort, thoughtful planning and structuring often take up the remaining 80%. The initial version of my application helped me learn Django, SQL, NoSQL (MongoDB), and Django ORM. However, it became clear that the design and structure I had implemented were not suitable for medium-to-large-scale applications.</p>
         <p class="text_regular">Starting without a concrete plan taught me the critical importance of structuring applications before coding. My first iteration helped me learn Django and database management, but it wasn't scalable. I rebuilt the application with Django REST Framework and React, adopting RESTful principles for a more maintainable architecture.</p>
       </div>
+      
       <div class="technologies_section">
         <h2 class="header_medium">Technologies Used</h2>
         <p class="mb-4">My CRM leverages a robust tech stack to ensure scalability, efficiency, and security. Here's a breakdown:</p>
