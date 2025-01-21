@@ -1,7 +1,11 @@
 <template>
   <h1 class="header_large"> <span class="capitalize font-bold">First Steps to Programming :</span> Building a Pixel Art Game</h1>
     <div class="flex flex-col gap-14">
-       <!-- main header -->
+      <div>
+        <h3 class="header_medium">please note</h3>
+        <div class="text_regular"><p class="bg-[#0d0d0d] bg-opacity-70 inline">If you're here to see the project: Unfortunately, I didn't keep track of the licenses for each asset I used. As a result, I need to replace the assets with new ones and properly document their licenses to ensure the project can be showcased on my Git repository. This may take some time, and I appreciate your understanding.</p></div>
+      </div>
+        <!-- main header -->
        <div class="introduction_section">
          <h2 class="header_medium">Introduction</h2>
          <p class="text_regular">When I first started learning programming, I found myself jumping from one tutorial to another and completing courses without truly understanding the concepts. I realized that the best way to learn was to take on a challenging project—one that would push me to apply what I’d learned and uncover new skills along the way. That’s when I decided to build a pixel art game using Python.</p>
@@ -68,7 +72,6 @@
 
        <div class="challenges_section">
         <h2 class="header_medium">Challenges and Lessons Learned</h2>
-        <!-- <p class="text_regular">The project wasn’t without its challenges:</p> -->
         <ul class="header_ul_regular">
           <li><span class="font-semibold">Understanding Object-Oriented Programming (OOP):</span> Learning to design reusable and efficient code structures.</li>
           <li><span class="font-semibold">Handling FPS and Animations: </span>Ensuring smooth gameplay required studying Pygame’s documentation and experimenting with performance optimization.</li>
@@ -83,10 +86,6 @@
         <p class="text_regular">It also showed me how much fun programming can be when applied to creative projects. Whether you’re new to coding or looking for a rewarding challenge, building something like this is a great way to learn and grow.</p>
       </div>
 
-      <div class="plan_section">
-        <h2 class="header_medium">Challenges</h2>
-        <p class="text_regular">The main challenges I faced were understanding FPS handling, applying mathematics to gameplay mechanics, animating sprites, and mastering OOP concepts. Overcoming these hurdles required a lot of perseverance, reading Pygame documentation, and watching countless tutorials.</p>
-      </div>
 
     </div>
    </template>
