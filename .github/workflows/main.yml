@@ -1,0 +1,37 @@
+name: CI/CD for Dockerized Application
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Deploy to EC2 portfolio server
+      - name: Update services on EC2 portfolio server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.Portfolio_EC2_HOST }}
+          username: ${{ secrets.Portfolio_EC2_USER }}
+          key: ${{ secrets.Portfolio_EC2_KEY }}
+          port: 22
+          script: |
+            # Log in to Docker Hub on EC2
+            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            
+            # Pull updated images
+            docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_frontend:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_backend:latest
+            
+            cd portfolio_app
+            docker-compose down
+            docker-compose up -d
