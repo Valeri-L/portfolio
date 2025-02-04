@@ -16,7 +16,7 @@ const projects = ref([
     title: 'weather API comparison',
     text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate. This tool emphasizes the importance of verifying data sources.',
     button_text:"view on GIT",
-    url:"https://github.com/hayhuhin/weather_API_representation",
+    url:"https://github.com/valeri-l/weather_API_representation",
     documentation:"/documentation/weather_api"
 },
   {
@@ -24,7 +24,7 @@ const projects = ref([
     title: 'top down fighter',
     text: 'A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, all brought to life with beautifully crafted free pixel art assets.',
     button_text:"view on GIT",
-    url:"https://github.com/hayhuhin/fighter",
+    url:"https://github.com/valeri-l/fighter",
     documentation:"/documentation/top_down"
 },
 ]);
