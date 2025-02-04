@@ -16,7 +16,7 @@ const projects = ref([
     title: 'weather API comparison',
     text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate. This tool emphasizes the importance of verifying data sources.',
     button_text:"view on GIT",
-    url:"https://github.com/valeri-l/weather_API_representation",
+    url:"https://github.com/valeri-l/weather_representation",
     documentation:"/documentation/weather_api"
 },
   {
