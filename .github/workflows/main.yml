@@ -8,13 +8,57 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
+  BACKEND_SECRET_KEY: ${{ secrets.BACKEND_SECRET_KEY }}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # Step 3: Create .env file for the backend
+      - name: Create Backend .env File
+        run: |
+          echo "SECRET_KEY=${{ secrets.BACKEND_SECRET_KEY }}" > ./backend/.env
+          echo "DEBUG=${{ secrets.DEBUG }}" >> ./backend/.env
+          
+          echo "LEETCODE_API_URL=${{ secrets.LEETCODE_API_URL }}" >> ./backend/.env
+          echo "GRAPHQL_QUERY=${{ secrets.GRAPHQL_QUERY }}" >> ./backend/.env
+          
+          echo "REDIS_LOCATION=${{ secrets.REDIS_LOCATION }}" >> ./backend/.env
+          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> ./backend/.env
+          
+          echo "EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}" >> ./backend/.env
+          echo "EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}" >> ./backend/.env
+          
+          echo "CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}" >> ./backend/.env
+          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> ./backend/.env
+          
+          echo "ALLOWED_HOSTS_99=${{ secrets.ALLOWED_HOSTS_99 }}" >> ./backend/.env
+          echo "RECAPTCHA_SECRET_KEY=${{ secrets.GRAPHQL_QUERY }}" >> ./backend/.env
+      
+
+      # Step 4: Build and tag Docker images
+      - name: Build Docker Images
+        run: |
+          docker build -t $DOCKER_USERNAME/portfolio_backend:latest ./backend
+          docker build -t $DOCKER_USERNAME/portfolio_frontend:latest ./frontend
+
+      # Step 5: Push Docker images to Docker Hub
+      - name: Push Docker Images to Docker Hub
+        run: |
+          docker push $DOCKER_USERNAME/application-backend:latest
+          docker push $DOCKER_USERNAME/application-frontend:latest
+          docker push $DOCKER_USERNAME/application-nginx:latest
+
+
 
       # Deploy to EC2 portfolio server
       - name: Update services on EC2 portfolio server
@@ -35,3 +79,4 @@ jobs:
             cd portfolio_app
             docker compose down
             docker compose up -d
+
