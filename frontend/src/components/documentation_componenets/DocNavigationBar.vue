@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import colors from '../../assets/styles/main';
+import { useRouter } from 'vue-router';
 
 const activeButton = ref(null);
 
@@ -24,6 +25,15 @@ const scrollTo = (section) => {
 };
 
 const button_sx = `bg-transparent text-primary-300 hover:text-borders-grey underline border-none hover:no-underline underline-offset-8 decoration-text-purple focus:outline-none focus:ring-0`;
+
+
+
+
+const router = useRouter();
+const goBack = () => {
+  router.go(-1); 
+};
+
 </script>
 
 <template>
@@ -34,9 +44,9 @@ const button_sx = `bg-transparent text-primary-300 hover:text-borders-grey under
       <div class="flex items-center gap-8">
       <!-- logo -->
         <div class="text-xl">
-            <a href="/" class="">
-              <button :class="button_sx">go back</button><!-- logo on the top left side -->
-            </a>
+            <!-- <a href="/" onclick="return false;" class=""> -->
+              <button @click="goBack" :class="button_sx">go back</button><!-- logo on the top left side -->
+            <!-- </a> -->
             </div>
 
         </div>
