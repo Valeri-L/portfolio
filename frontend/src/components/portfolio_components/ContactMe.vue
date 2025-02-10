@@ -220,7 +220,7 @@ const handleClose = () => {
             <a  aria-label="phone call" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2">
                 <img src="/phone_call.svg" alt="phone call" class="w-6 h-6" >
-                <h3 class="pt-1 uppercase bg-text-red ">phone number</h3>
+                <h3 class="pt-1 uppercase ">phone number</h3>
               </div>
               <p class="pl-3 capitalize">+972 0552251273</p>
             </a>
