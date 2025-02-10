@@ -53,16 +53,19 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* .card {
-  padding: 2em;
-} */
-
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding-bottom: 2rem;
   padding: min(4em,10%);
 }
+
+@media(max-width:400px){
+  #app {
+    padding: 10%;
+  }
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
