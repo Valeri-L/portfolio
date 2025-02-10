@@ -16,7 +16,7 @@ import WhatIDo from './portfolio_components/WhatIDo.vue';
   </header>
   
   <!-- Content of the page -->
-  <div class="bg-primary-200 mx-4 md:mx-10 lg:mx-20 md:p-0 rounded-lg shadow-lg mt-[180px]" >
+  <div class="bg-primary-200 mx-0 md:mx-10 lg:mx-20 md:p-0 rounded-lg shadow-lg mt-[180px]" >
 
     <!-- About Me Section -->
     <section id="about-me" class="pt-0">

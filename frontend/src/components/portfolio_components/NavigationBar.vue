@@ -145,12 +145,13 @@ const button_sx = "";
   
   nav ul {
     display: flex;
-    align-items:baseline;
+    align-items:center;
     padding: 0.5rem;
   }
   
   nav li {
     height: 50px;
+    text-wrap: nowrap;
   }
 
   nav button {
@@ -180,6 +181,7 @@ const button_sx = "";
 
   nav li:nth-child(1) {
     margin-right: auto ;
+    height: 100%;
   }
 
   .sidebar {
@@ -209,6 +211,8 @@ const button_sx = "";
 
   .sidebar-button{
     display: none;
+    height: 100%;
+    
   }
 
   @media (min-width: 801px) {
@@ -217,7 +221,7 @@ const button_sx = "";
     }
   }
 
-  @media(max-width :800px) {
+  @media(max-width :930px) {
     .hideOnMobile{
       display: none;
     }
