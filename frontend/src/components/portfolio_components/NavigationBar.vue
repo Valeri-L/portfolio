@@ -5,19 +5,20 @@ const activeButton = ref(null);
 
 const showSideBar = () => {
   const sidebar = document.querySelector(".sidebar")
-  sidebar.style.display = "flex"
+  sidebar.classList.add("active");
 
 }
+
 
 
 const hideSideBar = () => {
   const sidebar = document.querySelector(".sidebar")
-  sidebar.style.display = "none"
+  sidebar.classList.remove("active");
 }
 
 const closeBtn = () => {
   const sidebar = document.querySelector(".sidebar")
-  sidebar.style.display = "none"
+  sidebar.classList.remove("active");
 }
 
 const scrollTo = (section) => {
@@ -44,9 +45,9 @@ const button_sx = "";
   <nav class="font-pixelify bg-primary-100 bg-opacity-80 border-b border-text-red border-opacity-30">
     <ul >
 
-      <li>
-        <div class="text-xl">
-          <button :class="button_sx">Valeri Levinson</button><!-- logo on the top left side -->
+      <li class="">
+        <div class="text-xl h-[100%]">
+          <button :class="button_sx" @click="scrollTo('about-me')">Valeri Levinson</button><!-- logo on the top left side -->
         </div>
       </li>
 
@@ -82,9 +83,9 @@ const button_sx = "";
       </li>
 
       <li class="sidebar-button" :onclick="showSideBar">
-        <a href="#" >
+        <button >
           <img src="/menuIcon.svg" alt="sidebar icon"></img>
-        </a>
+        </button>
       </li>
     </ul>
 
@@ -95,9 +96,9 @@ const button_sx = "";
       <!-- flex items-center gap-8 -->
       <!-- logo -->
       <li :onclick="hideSideBar">
-        <a href="#" >
+        <button >
           <img src="/arrowBack.svg" alt="close icon"></img>
-        </a>
+        </button>
       </li>
 
       <li>
@@ -141,6 +142,8 @@ const button_sx = "";
     box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
     width:100%;
     position: fixed;
+    overflow-x: hidden;
+
   }
   
   nav ul {
@@ -156,7 +159,7 @@ const button_sx = "";
 
   nav button {
   height: 100%;
-  padding: 0 30px;
+  padding: 0 0.8rem;
   background-color:transparent;
   border: none;
   transition-duration: 0.4s;
@@ -181,7 +184,8 @@ const button_sx = "";
 
   nav li:nth-child(1) {
     margin-right: auto ;
-    height: 100%;
+    
+    
   }
 
   .sidebar {
@@ -193,17 +197,26 @@ const button_sx = "";
     z-index: 999;
     background-color: rgba(26, 26, 26, 0.592);
     box-shadow: -10px 0 -10px rgba(0,0,0,0.1);
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     backdrop-filter: blur(10px);
+    overflow-x: hidden;
+
+    /* Animation */
+    transform: translateX(100%); /* Start off-screen */
+    transition: transform 0.3s ease-in-out;
+
 
   }
-
+  .sidebar.active {
+    transform: translateX(0);
+  }
   .sidebar li {
     width: 100%;
   }
+
 
   .sidebar button {
     width: 100%;
@@ -215,11 +228,7 @@ const button_sx = "";
     
   }
 
-  @media (min-width: 801px) {
-    .sidebar {
-      display: none;
-    }
-  }
+
 
   @media(max-width :930px) {
     .hideOnMobile{
