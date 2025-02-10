@@ -62,7 +62,7 @@ button:focus-visible {
 
 @media(max-width:400px){
   #app {
-    padding: 10%;
+    padding: 0%;
   }
 }
 
