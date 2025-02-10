@@ -10,7 +10,7 @@ const count = ref(0)
 
 <template>
 
-    <div class="border-solid rounded-lg border-2 border-borders-purple bg-sections-about_me bg-opacity-10 p-10">
+    <div class="border-solid rounded-lg border-2 border-borders-purple bg-sections-about_me bg-opacity-10 p-2 lg:p-10 md:p-6 ">
       <h1 class="capitalize">about me</h1>
       <div class="ml-6 m-4 max-w-2xl">
         <p class="mb-6">Hi, I'm Valeri. I'm a Backend Developer with Full-Stack skills and a strong foundation in Python, Django, React, and modern technologies like AWS and Docker. I’m based in Bat-Yam, Israel, with extensive experience in networking.</p>

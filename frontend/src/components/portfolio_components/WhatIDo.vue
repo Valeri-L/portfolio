@@ -27,7 +27,7 @@ const whatIDoItems = ref([
   
     <section class="what-i-do-section py-10">
     <h2 class="text-3xl text-start mb-8 ml-10">What I Do</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl p-4 border border-borders-purple rounded-lg bg-sections-what_i_do bg-opacity-10">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl p-4 border border-borders-purple rounded-lg bg-sections-what_i_do bg-opacity-10">
       <!-- Single Column -->
       <div 
         v-for="(item, index) in whatIDoItems" 
@@ -42,7 +42,7 @@ const whatIDoItems = ref([
           class="h-60 object-contain mb-4"
         />
         <!-- Title -->
-        <h3 class="font-semibold text-primary-300 mb-2 text-center">{{ item.title }}</h3>
+        <h3 class="font-semibold text-primary-300 mb-2 text-start">{{ item.title }}</h3>
         <!-- Description -->
         <p class="text-primary-300 mx-4 max-w-xl leading-relaxed">{{ item.text }}</p>
       </div>

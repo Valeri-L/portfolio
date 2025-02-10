@@ -178,15 +178,15 @@ const handleClose = () => {
       </div>
     </div>
     <!-- alert itself-->
-    <div :class="{'blur-sm': showAlert}" class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 max-w-7xl mx-auto border border-borders-grey rounded-md p-4 bg-sections-contact_me">
+    <div :class="{'blur-sm': showAlert}" class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 max-w-7xl mx-auto border border-borders-grey rounded-md p-4 bg-sections-contact_me">
 
     <!-- First Column (Largest - acts as a title) -->
-      <div class="first_column m-6 lg:border-r border-borders-grey border-opacity-30">
+      <div class="first_column m-2 lg:border-r border-borders-grey border-opacity-30">
         <h3 class="uppercase underline mb-4">social media</h3>
 
         <!-- the social media buttons-->
-        <div class="flex flex-col gap-8 w-[200px] mt-16 ml-4">
-          <div >
+        <div class="flex flex-col gap-6 min-w-[350px] mt-16 ml-0">
+          <!-- <div >
             <a target="_blank" aria-label="linkedin" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/linkedin.svg" alt="Linkedin" class="w-6 h-6" >
@@ -194,9 +194,9 @@ const handleClose = () => {
               </div>
               <p class="pl-3 capitalize">currently no linkedin</p>
             </a>
-          </div>
+          </div> -->
 
-          <div>
+          <div class="">
             <a href="mailto:levinsonvaleri@gmail.com" aria-label="Email" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/email.svg" alt="email" class="w-6 h-6" >
@@ -206,7 +206,7 @@ const handleClose = () => {
             </a>
           </div>
 
-          <div>
+          <!-- <div>
             <a aria-label="facebook" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2 ">
                 <img src="/facebook1.svg" alt="facebook" class="w-6 h-6" >
@@ -214,13 +214,13 @@ const handleClose = () => {
               </div>
               <p class="pl-3 capitalize">currently no facebook</p>
             </a>
-          </div>
+          </div> -->
 
-          <div>
+          <div class="">
             <a  aria-label="phone call" class="hover:text-gray-300 text-primary-300">
               <div class="flex gap-2">
                 <img src="/phone_call.svg" alt="phone call" class="w-6 h-6" >
-                <h3 class="pt-1 uppercase">phone number</h3>
+                <h3 class="pt-1 uppercase bg-text-red ">phone number</h3>
               </div>
               <p class="pl-3 capitalize">+972 0552251273</p>
             </a>
@@ -245,7 +245,7 @@ const handleClose = () => {
         <h3 class="uppercase underline mb-4">leave a message</h3>
         <div class="space-y-4 items-center">
           <!-- form section -->
-          <div class="max-w-lg mx-auto p-6 shadow-md rounded-lg">
+          <div class="max-w-lg mx-auto p-0 lg:p-6 md:p-6 shadow-md rounded-lg">
             <form @submit.prevent="sendMessage">
               <!-- Name -->
               <div class="mb-4">
