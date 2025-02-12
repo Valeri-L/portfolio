@@ -36,7 +36,7 @@ class MessageFormView(APIView):
                 'response': recaptcha_token,
             })
             recaptcha_result = recaptcha_response.json()
-
+            print(recaptcha_response)
             if not recaptcha_result.get('success'):
                 return Response({'error': 'Invalid reCAPTCHA token.'}, status=status.HTTP_400_BAD_REQUEST)
 
