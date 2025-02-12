@@ -31,14 +31,14 @@ REST_FRAMEWORK = {
 ALLOWED_HOSTS = [
     os.getenv("ALLOWED_HOSTS"),
     os.getenv("ALLOWED_HOSTS_99"),
-    # "localhost",  #only for development
-    # "127.0.0.1"   #only for development
+    "localhost",  #only for development
+    "127.0.0.1"   #only for development
     ]
 
 CORS_ALLOWED_ORIGINS = [
     os.getenv("CORS_ALLOWED_ORIGINS"),
-    # "http://127.0.0.1:3000", #only for development
-    # "http://localhost:3000"  #only for development
+    "http://127.0.0.1:3000", #only for development
+    "http://localhost:3000"  #only for development
 ]
 
 

@@ -87,6 +87,7 @@ const sendMessage = async () => {
 
     clearTimeout(timeoutId); // Clear the timeout if the request succeeds
 
+
     if (!response.ok) {
       throw new Error('Failed to send message.');
     }
