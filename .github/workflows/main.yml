@@ -51,8 +51,8 @@ jobs:
       # Step 4: Build and tag Docker images
       - name: Build & push Docker Images
         run: |
-          docker-compose build
-          docker-compose push
+          docker compose build
+          docker compose push
 
 
       # Deploy to EC2 portfolio server
