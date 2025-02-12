@@ -42,7 +42,7 @@ jobs:
           echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> ./backend/.env
           
           echo "ALLOWED_HOSTS_99=${{ secrets.ALLOWED_HOSTS_99 }}" >> ./backend/.env
-          echo "RECAPTCHA_SECRET_KEY=${{ secrets.GRAPHQL_QUERY }}" >> ./backend/.env
+          echo "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}" >> ./backend/.env
       
 
       # Step 4: Build and tag Docker images
