@@ -72,6 +72,6 @@ jobs:
             #docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_backend:latest
             
             cd portfolio_app
-            docker compose ip --build -d
+            docker compose up --build -d
             
 
