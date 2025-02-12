@@ -43,19 +43,23 @@ jobs:
           
           echo "ALLOWED_HOSTS_99=${{ secrets.ALLOWED_HOSTS_99 }}" >> ./backend/.env
           echo "RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}" >> ./backend/.env
+
+          ls .
+          ls ./backend
+          
       
 
       # Step 4: Build and tag Docker images
       - name: Build Docker Images
-        run: |
-          docker build -t $DOCKER_USERNAME/portfolio_backend:latest ./backend
-          docker build -t $DOCKER_USERNAME/portfolio_frontend:latest ./frontend
+        #run: |
+         # docker build -t $DOCKER_USERNAME/portfolio_backend:latest ./backend
+          #docker build -t $DOCKER_USERNAME/portfolio_frontend:latest ./frontend
 
       # Step 5: Push Docker images to Docker Hub
       - name: Push Docker Images to Docker Hub
-        run: |
-          docker push $DOCKER_USERNAME/portfolio_backend:latest 
-          docker push $DOCKER_USERNAME/portfolio_frontend:latest 
+        #run: |
+         # docker push $DOCKER_USERNAME/portfolio_backend:latest 
+          #docker push $DOCKER_USERNAME/portfolio_frontend:latest 
 
 
       # Deploy to EC2 portfolio server
@@ -71,10 +75,10 @@ jobs:
             echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
             
             # Pull updated images
-            docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_frontend:latest
-            docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_backend:latest
+            #docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_frontend:latest
+            #docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio_backend:latest
             
             cd portfolio_app
-            docker compose down
-            docker compose up -d
+            #docker compose down
+            #docker compose up -d
 
