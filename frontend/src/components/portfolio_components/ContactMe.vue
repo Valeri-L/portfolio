@@ -72,6 +72,7 @@ const sendMessage = async () => {
     }
 
     // 'https://portfolio.valerilevinson.com/api/message'
+    //  'http://127.0.0.1:8000/api/message'
     // Include the token in the payload
     const response = await fetch('https://portfolio.valerilevinson.com/api/message', {
       method: 'POST',
