@@ -10,51 +10,47 @@ import 'swiper/css/effect-coverflow';
 // Data for the "projects" section
 const projects = ref([
   {
-    image: 'valar_crm',
+    folder: 'tickettracker',
+    images: ['ticket_1.png', 'ticket_2.png', 'ticket_test.png'],
+    title: 'Ticket Manager',
+    text: 'fullstack web application designed to help organizations efficiently manage their operational tasks through an intuitive ticketing system.',
+    buttons: [
+      { button_text: "read more", url: "/documentation/valar_crm" },
+      { button_text: "visit application", url: "https://ticket-tracker.valar.software.com" }
+    ]
+  },
+  {
+    folder: 'crm',
+    images: ['crm_1.png', 'crm_2.png', 'crm_3.png'],
     title: 'valar CRM',
     text: 'A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights.',
     buttons: [
-      {
-        button_text: "read more",
-        url: "/documentation/valar_crm"
-      },
-      {
-        button_text: "see demo",
-        url: "https://crm.valerilevinson.com",
-      }
+      { button_text: "read more", url: "/documentation/valar_crm" },
+      { button_text: "see demo", url: "https://crm.valerilevinson.com" }
     ]
   },
   {
-    image: 'weather_api',
+    folder: 'weatherapp',
+    images: ['weather_1.png','weather_2.png', 'weather_3.png'],
     title: 'weather API comparison',
-    text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate. This tool emphasizes the importance of verifying data sources.',
+    text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate.',
     buttons: [
-      {
-        button_text: "read more",
-        url: "/documentation/weather_api",
-      },
-      {
-        button_text: "view on GIT",
-        url: "https://github.com/valeri-l/weather_representation",
-      }
+      { button_text: "read more", url: "/documentation/weather_api" },
+      { button_text: "view on GIT", url: "https://github.com/valeri-l/weather_representation" }
     ]
   },
   {
-    image: 'top_down',
+    folder: 'topdown',
+    images: ['topdown_2.jpg', 'topdown_3.jpg','fighter_test.png'],
     title: 'top down fighter',
-    text: 'A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, all brought to life with beautifully crafted free pixel art assets.',
+    text: 'A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, brought to life with beautifully crafted pixel art assets.',
     buttons: [
-      {
-        button_text: "read more",
-        url: "/documentation/top_down",
-      },
-      {
-        button_text: "view on GIT",
-        url: "https://github.com/valeri-l/fighter",
-      }
+      { button_text: "read more", url: "/documentation/top_down" },
+      { button_text: "view on GIT", url: "https://github.com/valeri-l/fighter" }
     ]
-  },
-])
+  }
+]);
+
 </script>
 
 <template>
@@ -83,23 +79,28 @@ const projects = ref([
         class="max-w-[1400px] w-full mx-auto"
       >
 
-      <SwiperSlide v-for="(item, index) in projects" :key="index"    class=""
+      <SwiperSlide v-for="(item, index) in projects" :key="index">
+        <div class="flex flex-col mx-10 mb-10 h-full items-center justify-between">
+          
+          <!-- Three images overlapping -->
+          <div class="relative w-full h-[200px] md:h-[300px] flex justify-center items-center overflow-visible mb-6">
+            <img 
+              v-for="(img, imgIndex) in item.images"
+              :key="imgIndex"
+              :src="`/projects/${item.folder}/${img}`"
+              :alt="`Image ${imgIndex+1}`"
+              :class="[
+                'absolute md:static w-24 md:w-52 rounded-lg border border-gray-400 transition-transform duration-300 hover:scale-105',
+                imgIndex === 0 ? 'md:translate-x-[26px] md:translate-y-[22px]' : '',
+                imgIndex === 1 ? 'md:translate-x-[16px] md:translate-y-[-16px]' : '',
+                imgIndex === 2 ? 'md:translate-y-[16px]' : '',
+              ]"
+            />
+          </div>
 
-      >
-        <div class="flex flex-col mx-10 mb-10 h-full items-center justify-between ">
-          
-          <!-- Image -->
-          <img 
-            :src="`/projects/${item.image}.png`" 
-            :alt="item.title" 
-            class="h-60 object-contain mb-4 transition-transform duration-300 hover:scale-105"
-          />
-          
+          <!-- Title and description -->
           <div>
-            <!-- Title -->
             <h3 class="font-semibold text-primary-300 mb-2 text-center">{{ item.title }}</h3>
-
-            <!-- Description -->
             <p class="text-primary-300 text-center mx-4 max-w-xl leading-relaxed">{{ item.text }}</p>
           </div>
 
@@ -116,6 +117,7 @@ const projects = ref([
 
         </div>
       </SwiperSlide>
+
     </Swiper>
   </div>
   </section>
