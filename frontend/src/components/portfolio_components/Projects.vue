@@ -15,7 +15,6 @@ const projects = ref([
     title: 'Ticket Manager',
     text: 'fullstack web application designed to help organizations efficiently manage their operational tasks through an intuitive ticketing system.',
     buttons: [
-      { button_text: "read more", url: "/documentation/valar_crm" },
       { button_text: "visit application", url: "https://ticket-tracker.valar.software.com" }
     ]
   },
@@ -25,8 +24,8 @@ const projects = ref([
     title: 'valar CRM',
     text: 'A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights.',
     buttons: [
-      { button_text: "read more", url: "/documentation/valar_crm" },
-      { button_text: "see demo", url: "https://crm.valerilevinson.com" }
+      { button_text: "read documentation", url: "/documentation/valar_crm" },
+      // { button_text: "see demo", url: "https://crm.valerilevinson.com" }
     ]
   },
   {
@@ -35,7 +34,7 @@ const projects = ref([
     title: 'weather API comparison',
     text: 'A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate.',
     buttons: [
-      { button_text: "read more", url: "/documentation/weather_api" },
+      { button_text: "read documentation", url: "/documentation/weather_api" },
       { button_text: "view on GIT", url: "https://github.com/valeri-l/weather_representation" }
     ]
   },
@@ -45,7 +44,7 @@ const projects = ref([
     title: 'top down fighter',
     text: 'A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, brought to life with beautifully crafted pixel art assets.',
     buttons: [
-      { button_text: "read more", url: "/documentation/top_down" },
+      { button_text: "read documentation", url: "/documentation/top_down" },
       { button_text: "view on GIT", url: "https://github.com/valeri-l/fighter" }
     ]
   }
