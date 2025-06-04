@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // Import components
-import App from './App.vue'; // Main layout
-import PortfolioPage from './components/PortfolioPage.vue'
-import DocumentationPage from './components/DocumentationPage.vue'; // Dynamic documentation page
-import NotFound from './components/error_componenets/NotFound.vue'; // 404 page
+// import App from './App.vue'; // Main layout
+// import PortfolioPage from './components/HomePage.vue'
+// import DocumentationPage from './components/DocumentationPage.vue'; // Dynamic documentation page
+// import NotFound from './components/error_componenets/NotFound.vue'; // 404 page
 
 const routes = [
   {
     path: '/',  
-    component: () => import('./components/PortfolioPage.vue'),  // Lazy load PortfolioPage
+    component: () => import('./pages/HomePage.vue'),  // Lazy load PortfolioPage
   },
   {
     path: '/documentation/:project',  
-    component: () => import('./components/DocumentationPage.vue'),  // Lazy load DocumentationPage
+    component: () => import('./pages/DocumentationPage.vue'),  // Lazy load DocumentationPage
   },
   {
     path: '/:pathMatch(.*)*',  

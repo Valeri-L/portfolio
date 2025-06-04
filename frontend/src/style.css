@@ -54,10 +54,10 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding-bottom: 2rem;
-  padding: min(4em,10%);
+  /* padding: min(4em,10%); */
 }
 
 @media(max-width:400px){
