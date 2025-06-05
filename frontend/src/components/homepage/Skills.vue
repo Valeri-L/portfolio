@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useLanguage } from '../../composables/useLanguage'
+import ScrollVelocity from '../effects/scrollVelocity/ScrollVelocity.vue';
 
 const { lang, getText } = useLanguage()
 
@@ -17,6 +18,7 @@ const skills = ref([
   { image: 'pygame', name: 'Pygame' },
   { image: 'css', name: 'CSS' },
   { image: 'mysql', name: 'MySQL' },
+  
 ]);
 
 </script>
@@ -24,25 +26,38 @@ const skills = ref([
 <template>
     <!-- <h3 class="capitalize">skills</h3> -->
   
-    <section class="skills-section p-10 my-6">
-        <h2 class="text-3xl font-bold text-start my-6" :dir="lang === 'he' ? 'rtl' : 'ltr'">{{ getText('skills.title')}}</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div 
-                v-for="skill in skills" 
-                :key="skill.name" 
-                class="flex items-start space-x-3">
-            <img 
-            :src="`/skills/${skill.image}.png`" 
-            :alt="skill.name" 
-            class="h-8 object-contain"
-            />
-                <h4 class="text-lg font-medium text-">{{ skill.name }}</h4>
-            </div>
-        </div>
-    </section>
+    <section class="skills-section p-10 my-6 bg-gray-900">
+    <h2 
+      class="text-3xl font-bold text-start my-6 text-white" 
+      :dir="lang === 'he' ? 'rtl' : 'ltr'"
+    >
+      {{ getText('skills.title') }}
+    </h2>
+
+    <!-- Top line scrolls left-to-right (baseVelocity=+80) -->
+ <!-- Top line: scrolls left→right -->
+ <div class="mb-6">
+      <ScrollVelocity
+        :items="skills"
+        :baseVelocity="100"
+        :itemWidth="200"
+      />
+    </div>
+
+    <!-- Bottom line: scrolls right→left -->
+    <div class="mt-6">
+      <ScrollVelocity
+        :items="skills"
+        :baseVelocity="-100"
+        :itemWidth="200"
+      />
+    </div>
+  </section>
 
 </template>
 
 <style scoped>
-
+.skills-section > div + div {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
 </style>

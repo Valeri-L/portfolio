@@ -240,8 +240,6 @@ const processedParagraphs = computed(() => {
 .sliding-gradient {
   position: absolute;
   background-color: rgba(199, 120, 221, 0.15);
-  padding: 4rem;
-  margin: 0 10rem;
   border: 3px solid rgba(199, 120, 221, 0.15);
   border-radius: .7rem;
   animation: slideFromRight 1.2s ease-in-out;
@@ -250,8 +248,7 @@ const processedParagraphs = computed(() => {
 .aboutMeContext {
   color: #f2f2f2;
   z-index: 999;
-  padding: 4rem;
-  margin: 0 10rem;
+  padding: 4rem 6rem;
   animation: slideFromLeft 1.2s ease-in-out;
 }
 
