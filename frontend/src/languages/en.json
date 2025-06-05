@@ -3,9 +3,9 @@
       "title": "About Me",
       "name": "Valeri Levinson",
       "paragraphs": [
-        "Hi, I'm Valeri. I'm a Backend Developer with Full-Stack skills and a strong foundation in Python, Django, React, and modern technologies like AWS and Docker. I’m based in Bat-Yam, Israel, with extensive experience in networking.",
-        "I’m incredibly passionate about backend engineering, web application development, and creating full-stack solutions that are both functional and visually intuitive. I thrive on building large and complex projects, designing with purpose, and coding with passion.",
-        "In my free time, I enjoy solving LeetCode problems, enhancing my skills with new frameworks and technologies, and working on real-world applications like my CRM Project and Ticket Manager app."
+        "**Hi, I'm Valeri**. I'm a Full-Stack Developer with a strong focus on **backend systems, SaaS architecture**, and **networking-integrated applications**. I specialize in **Python, FastAPI, Django, Next.js**, and modern technologies like **Docker** and **AWS**. Based in Bat-Yam, Israel, I bring hands-on experience in both **full-stack development** and **enterprise networking**.",
+        "I'm passionate about building **scalable, intuitive** web platforms—particularly in the **CRM** and **ticketing** space. I thrive on creating **impactful** backend systems, crafting **thoughtful** interfaces, and solving **real-world challenges** through clean, purpose-driven code.",
+        "In my free time, I enhance my skills by learning new technologies, and developing production-ready tools like my live **Ticket Manager** app. I'm currently working on expanding it with **premium SaaS features**, and preparing to open-source a full **CRM platform** later this year."
       ]
     },
     "nav": {
