@@ -16,7 +16,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
   </header>
   <!-- px-0 md:px-10 lg:px-20 md:p-0 -->
   <!-- Content of the page -->
-  <div class="bg-primary-200 flex flex-col rounded-lg shadow-lg pt-[12rem] px-[8rem]" >
+  <div class="bg-primary-200 flex flex-col rounded-lg shadow-lg mt-[12rem] mx-[8rem]" >
 
     <!-- About Me Section -->
     <section id="about-me" class="h-screen">

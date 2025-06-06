@@ -26,9 +26,9 @@ const skills = ref([
 <template>
     <!-- <h3 class="capitalize">skills</h3> -->
   
-    <section class="skills-section p-10 my-6 bg-gray-900">
+    <div class="skills-section  my-6 ">
     <h2 
-      class="text-3xl font-bold text-start my-6 text-white" 
+      class="text-3xl font-bold text-center my-6 text-white" 
       :dir="lang === 'he' ? 'rtl' : 'ltr'"
     >
       {{ getText('skills.title') }}
@@ -52,7 +52,7 @@ const skills = ref([
         :itemWidth="200"
       />
     </div>
-  </section>
+  </div>
 
 </template>
 

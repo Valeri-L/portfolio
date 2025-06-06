@@ -11,7 +11,7 @@ const sectionTitle = computed(() => getText('whatIDo.title'))
 
 <template>
   <section 
-    class="what-i-do-section py-10"
+    class="what-i-do-section"
 
   >
     <h2 class="text-3xl text-start mb-8 ml-10" :dir="lang === 'he' ? 'rtl' : 'ltr'">{{ sectionTitle }}</h2>
