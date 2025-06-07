@@ -24,7 +24,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="h-screen">
+    <section id="skills" class="h-auto">
       <Skills />
     </section>
 
@@ -34,12 +34,12 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     </section>
 
     <!-- Achievements Section -->
-    <section id="achievements" class="h-screen">
+    <!-- <section id="achievements" class="h-screen">
       <Achievements />
-    </section>
+    </section> -->
 
     <!-- Projects Section -->
-    <section id="projects" class="h-screen">
+    <section id="projects" class="h-screen pt-[40rem]">
       <Projects />
     </section>
 

@@ -42,7 +42,7 @@
     },
     itemWidth: {
       type: Number,
-      default: 120 
+      default: 50 
     }
   })
   

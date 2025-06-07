@@ -16,25 +16,25 @@
         "contact": "Contact"
       },
       "skills": {
-        "title":"Technologies I Use"
+        "title":"My Tech Stack"
       },
         "whatIDo": {
-          "title": "What I Do",
+          "title": "Areas of Expertise",
           "items": [
             {
               "image": "fullstack",
               "title": "Full Stack Development",
-              "text": "I am proficient in building and deploying production-ready applications end-to-end. On the frontend, I utilize Figma for UI/UX design and Next.js (React) combined with Material UI and Bootstrap to deliver visually appealing and responsive interfaces. On the backend, I leverage FastAPI and Django as robust and scalable frameworks, complemented by strong knowledge of both SQL and NoSQL databases. For deployment and automation, I use GitHub Actions for CI/CD pipelines, Docker for containerization, and AWS for reliable cloud infrastructure."
+              "text": "I build and deploy production-grade web applications from end to end. On the frontend, I use Figma for UI/UX design and Next.js (React) with Material UI and Bootstrap to create responsive and visually engaging interfaces.On the backend, I work with FastAPI and Django to develop scalable APIs, backed by both SQL and NoSQL databases.I leverage Docker, GitHub Actions, and AWS to ensure reliable, automated deployments and secure cloud infrastructure."
             },
             {
               "image": "backend",
               "title": "backend development",
-              "text":"I build high-performing backends focused on efficiency, security, and maintainability. My expertise includes designing optimized database schemas, creating scalable RESTful APIs, implementing efficient routing and middleware, and writing comprehensive unit tests to ensure reliability. With deep proficiency in Python frameworks such as Django and FastAPI, as well as databases (both SQL and NoSQL), I tailor backend solutions precisely to each project's requirements."
+              "text":"I create high-performance backends that prioritize efficiency, security, and maintainability.My expertise includes designing optimized schemas, developing RESTful APIs, implementing middleware, and writing unit tests to ensure system reliability.I'm proficient in Django and FastAPI, with deep knowledge of SQL and NoSQL systems—tailoring each backend precisely to the project’s needs."
             },
             {
               "image": "networking",
               "title": "Networking & Security",
-              "text": "I have deep expertise in networking and security, essential for building robust web applications. My experience includes designing, implementing, and troubleshooting network infrastructures to ensure seamless communication and optimal performance. I specialize in firewall configuration and management (Cisco, Fortinet, Check Point, Juniper), DNS management, and secure, scalable network solutions. Leveraging AWS, I deploy and manage cloud-based services, ensuring reliability, scalability, and cost efficiency for modern applications."
+              "text": "With hands-on experience as a networking engineer, I design and secure robust network infrastructures to support scalable applications.My skill set includes firewall configuration (Cisco, Fortinet, Check Point, Juniper), DNS management, and implementing secure communication channels.Using AWS, I manage cloud-based environments with a focus on resilience, scalability, and cost efficiency for modern applications"
             }
           ]
         },

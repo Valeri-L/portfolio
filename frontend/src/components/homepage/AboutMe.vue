@@ -155,16 +155,16 @@ const processedParagraphs = computed(() => {
         <p>
           <template v-for="(seg, i) in segments" :key="i">
             <!-- Plain text segment -->
-            <span v-if="seg.type === 'text'">
+            <span v-if="seg.type === 'text'" style="color: rgba(255, 255, 255, 0.8);">
               {{ seg.content }}
             </span>
-            <!-- Highlighted segment → ShinyText -->
+            <!-- Highlighted segment → ShinyText rgba(220, 220, 220, 0.8)  rgba(167, 167, 167, 0.8)  rgba(130, 128, 128, 0.8) rgba(223, 160, 240, 0.15) rgba(168, 85, 247, 1)-->
             <ShinyText
               v-else
               :text="seg.content"
-              :speed="5"
-              baseColor="rgba(242, 242, 242, 1)"
-              shineColor="rgba(199, 120, 221, 0.6)"
+              :speed="2.5"
+              baseColor="rgba(255, 255, 255, 0.8)" 
+              shineColor="rgba(223, 160, 240, 0.8)"
               className="inline-block text-[1.3rem]"
             />
           </template>

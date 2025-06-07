@@ -8,15 +8,21 @@ const { lang, getText } = useLanguage()
 const skills = ref([
   { image: 'python', name: 'Python' },
   { image: 'javascript', name: 'JavaScript' },
-  { image: 'aws', name: 'Amazon Web Services' },
   { image: 'django', name: 'Django' },
   { image: 'react', name: 'React' },
-  { image: 'docker', name: 'Docker' },
-  { image: 'github', name: 'Git' },
   { image: 'html', name: 'HTML' },
-  { image: 'mongoDB', name: 'MongoDB' },
-  { image: 'pygame', name: 'Pygame' },
   { image: 'css', name: 'CSS' },
+
+  
+]);
+
+
+const skills2 = ref([
+  { image: 'github', name: 'Git' },
+  { image: 'pygame', name: 'Pygame' },
+  { image: 'docker', name: 'Docker' },
+  { image: 'aws', name: 'AWS' },
+  { image: 'mongoDB', name: 'MongoDB' },
   { image: 'mysql', name: 'MySQL' },
   
 ]);
@@ -26,9 +32,9 @@ const skills = ref([
 <template>
     <!-- <h3 class="capitalize">skills</h3> -->
   
-    <div class="skills-section  my-6 ">
+    <div class="skills-section  mb-[10rem] ">
     <h2 
-      class="text-3xl font-bold text-center my-6 text-white" 
+      class="text-3xl font-bold text-center mb-6 text-white" 
       :dir="lang === 'he' ? 'rtl' : 'ltr'"
     >
       {{ getText('skills.title') }}
@@ -47,7 +53,7 @@ const skills = ref([
     <!-- Bottom line: scrolls right→left -->
     <div class="mt-6">
       <ScrollVelocity
-        :items="skills"
+        :items="skills2"
         :baseVelocity="-100"
         :itemWidth="200"
       />
