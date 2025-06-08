@@ -19,27 +19,27 @@
         "title":"My Tech Stack"
       },
         "whatIDo": {
-          "title": "Areas of Expertise",
+          "title": "My Specializations",
           "items": [
             {
-              "image": "fullstack",
+              "image": "room.mp4",
               "title": "Full Stack Development",
               "text": "I build and deploy production-grade web applications from end to end. On the frontend, I use Figma for UI/UX design and Next.js (React) with Material UI and Bootstrap to create responsive and visually engaging interfaces.On the backend, I work with FastAPI and Django to develop scalable APIs, backed by both SQL and NoSQL databases.I leverage Docker, GitHub Actions, and AWS to ensure reliable, automated deployments and secure cloud infrastructure."
             },
             {
-              "image": "backend",
+              "image": "matrix.gif",
               "title": "backend development",
               "text":"I create high-performance backends that prioritize efficiency, security, and maintainability.My expertise includes designing optimized schemas, developing RESTful APIs, implementing middleware, and writing unit tests to ensure system reliability.I'm proficient in Django and FastAPI, with deep knowledge of SQL and NoSQL systems—tailoring each backend precisely to the project’s needs."
             },
             {
-              "image": "networking",
+              "image": "security.gif",
               "title": "Networking & Security",
               "text": "With hands-on experience as a networking engineer, I design and secure robust network infrastructures to support scalable applications.My skill set includes firewall configuration (Cisco, Fortinet, Check Point, Juniper), DNS management, and implementing secure communication channels.Using AWS, I manage cloud-based environments with a focus on resilience, scalability, and cost efficiency for modern applications"
             }
           ]
         },
         "projects": {
-  "title": "Projects",
+  "title": "My Projects",
   "list": [
     {
       "folder": "tickettracker",
@@ -47,16 +47,15 @@
       "title": "Ticket Manager",
       "text": "Fullstack web application designed to help organizations efficiently manage their operational tasks through an intuitive ticketing system.",
       "buttons": [
-        { "button_text": "visit application", "url": "https://ticket-tracker.valar.software.com" }
+        { "button_text": "visit application", "url": "https://ticket-tracker.valar.software" }
       ]
     },
     {
       "folder": "crm",
       "images": ["crm_1.png", "crm_2.png", "crm_3.png"],
       "title": "Valar CRM",
-      "text": "A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights.",
+      "text": "A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights. Coming Public Soon...",
       "buttons": [
-        { "button_text": "read documentation", "url": "/documentation/valar_crm" }
       ]
     },
     {
@@ -65,7 +64,6 @@
       "title": "Weather API Comparison",
       "text": "A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate.",
       "buttons": [
-        { "button_text": "read documentation", "url": "/documentation/weather_api" },
         { "button_text": "view on GIT", "url": "https://github.com/valeri-l/weather_representation" }
       ]
     },
@@ -73,10 +71,9 @@
       "folder": "topdown",
       "images": ["topdown_2.jpg", "topdown_3.jpg", "fighter_test.png"],
       "title": "Top Down Fighter",
-      "text": "A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, brought to life with beautifully crafted pixel art assets.",
+      "text": "A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, brought to life with beautifully crafted pixel art assets. documentation is coming soon.",
       "buttons": [
-        { "button_text": "read documentation", "url": "/documentation/top_down" },
-        { "button_text": "view on GIT", "url": "https://github.com/valeri-l/fighter" }
+        
       ]
     }
   ]

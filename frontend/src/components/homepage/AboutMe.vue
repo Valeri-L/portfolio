@@ -141,10 +141,10 @@ const processedParagraphs = computed(() => {
     <TiltedCard
       containerHeight="auto"        
       containerWidth="100%"         
-      :rotateAmplitude="12"
+      :rotateAmplitude="5"
       :scaleOnHover="1.05"          
-      :showMobileWarning="true"
-      :showTooltip="false"          
+      :showMobileWarning="false"
+      :showTooltip="false"
     >
   <div class="sliding-gradient inset-0"></div>
     <div class="aboutMeContext">

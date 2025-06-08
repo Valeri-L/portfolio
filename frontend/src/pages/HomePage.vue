@@ -16,39 +16,38 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
   </header>
   <!-- px-0 md:px-10 lg:px-20 md:p-0 -->
   <!-- Content of the page -->
-  <div class="bg-primary-200 flex flex-col rounded-lg shadow-lg mt-[12rem] mx-[8rem]" >
+  <!-- About Me Section -->
+  <section id="about-me" class="about-me-section h-screen mt-[12rem] mx-[8rem] bg-primary-200">
+    <AboutMe />
+  </section>
 
-    <!-- About Me Section -->
-    <section id="about-me" class="h-screen">
-      <AboutMe />
-    </section>
-
+  <div  class="bg-primary-200 flex flex-col  shadow-lg mx-[8rem] relative overflow-hidden"
+    >
     <!-- Skills Section -->
     <section id="skills" class="h-auto">
       <Skills />
     </section>
 
     <!-- What I Do Section -->
-    <section id="what_i_do" class="h-screen">
+    <section id="what_i_do" class="">
       <WhatIDo />
     </section>
 
-    <!-- Achievements Section -->
-    <!-- <section id="achievements" class="h-screen">
-      <Achievements />
-    </section> -->
-
     <!-- Projects Section -->
-    <section id="projects" class="h-screen pt-[40rem]">
+    <section id="projects" class="pt-[20rem]">
       <Projects />
     </section>
 
     <!-- Contact Me Section -->
-    <section id="contact-me" class="h-screen mb-10">
+    <!-- <section id="contact-me" class="h-screen ">
       <ContactMe />
-    </section>
+    </section> -->
   </div>
 </template>
 
 <style scoped>
+.about-me-section {
+  /* Allow any child to overflow beyond the 8rem gutters */
+  overflow: visible !important;
+}
 </style>

@@ -90,4 +90,8 @@
     display: inline-block;
     white-space: pre;
   }
+
+  .scroll-reveal-text .word {
+    opacity: 0;          /* hide words initially */
+  }
   </style>
