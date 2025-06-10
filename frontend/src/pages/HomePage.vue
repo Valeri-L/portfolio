@@ -23,10 +23,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
 
   <div  class="bg-primary-200 flex flex-col  shadow-lg mx-[8rem] relative overflow-hidden"
     >
-    <!-- Skills Section -->
-    <section id="skills" class="h-auto">
-      <Skills />
-    </section>
+
 
     <!-- What I Do Section -->
     <section id="what_i_do" class="">
@@ -38,10 +35,15 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
       <Projects />
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="mt-40">
+      <Skills />
+    </section>
+
     <!-- Contact Me Section -->
-    <!-- <section id="contact-me" class="h-screen ">
+    <section id="contact-me" class="h-screen">
       <ContactMe />
-    </section> -->
+    </section>
   </div>
 </template>
 

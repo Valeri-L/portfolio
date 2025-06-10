@@ -1,325 +1,339 @@
 <script setup>
-import { ref, computed,onMounted } from 'vue';
-import { useLanguage } from '../../composables/useLanguage';
+import { ref, computed, onMounted } from 'vue'
+import { useLanguage } from '../../composables/useLanguage'
+import FadeContent from '../effects/fadeContent/FadeContent.vue'
+import ScrollReveal from '../effects/scrollReveal/ScrollReveal.vue'
+import RevealLink from '../effects/flipLink/RevealLink.vue'
+import ShinyBorder from '../effects/shinyBorder/ShinyBorder.vue'
+import EncryptButton from '../effects/encryptButton/EncryptButton.vue'
+import Aurora from '../effects/backgroundVideo/Aurora.vue'
+
 const { lang, getText } = useLanguage()
 
+// --- Social links (left panel) ---
+const socialItems = [
+  { key: 'linkedin', url: 'https://linkedin.com/in/valeri-levinson', display: 'my linkedin' },
+  { key: 'email',    url: 'mailto:levinsonvaleri@gmail.com', display: 'levinsonvaleri@gmail.com' },
+  { key: 'phone',    url: 'tel:+9720552251273', display: '+972-055-2251273' },
+  { key: 'cv',       url: '/valerilevinson_CV.pdf', display: 'Download CV', download: true },
+]
 
-// Button disabled state
-const buttonDisabled = ref(false)
+// --- Form & reCAPTCHA & Alert state (right panel) ---
+const buttonDisabled      = ref(false)
+const formData            = ref({ name: '', email: '', phone: '', message: '' })
+const showAlert           = ref(false)
+const alertType           = ref('')       // 'success' | 'error'
+const alertMessage        = ref('')
+const typingEffectRunning = ref(false)
 
+// Load reCAPTCHA on mount
+const loadRecaptchaScript = () =>
+  new Promise((resolve, reject) => {
+    if (document.getElementById('recaptcha-script')) return resolve()
+    const s = document.createElement('script')
+    s.id = 'recaptcha-script'
+    s.src = 'https://www.google.com/recaptcha/api.js?render=6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc'
+    s.onload  = resolve
+    s.onerror = () => reject(new Error('reCAPTCHA load failed'))
+    document.head.appendChild(s)
+  })
+onMounted(loadRecaptchaScript)
 
-const loadRecaptchaScript = () => {
-  return new Promise((resolve, reject) => {
-    if (document.getElementById('recaptcha-script')) {
-      resolve();
-      return;
-    }
-
-    const recaptchaScript = document.createElement('script');
-    recaptchaScript.id = 'recaptcha-script';
-    recaptchaScript.src = 'https://www.google.com/recaptcha/api.js?render=6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc';
-    recaptchaScript.onload = resolve;
-    recaptchaScript.onerror = () => reject(new Error('Failed to load reCAPTCHA script.'));
-    document.head.appendChild(recaptchaScript);
-  });
-};
-
-
-const initializeRecaptcha = async () => {
-  await loadRecaptchaScript(); // Ensure the script is loaded
-  return new Promise((resolve) => {
-    if (window.grecaptcha) {
-      window.grecaptcha.ready(() => resolve());
+// Typing‐effect for alert
+function typingEffect() {
+  if (typingEffectRunning.value) return
+  typingEffectRunning.value = true
+  const full = alertMessage.value
+  alertMessage.value = ''
+  let i = 0
+  const speed = 50
+  function type() {
+    if (i < full.length) {
+      alertMessage.value += full[i++]
+      setTimeout(type, speed)
     } else {
-      reject(new Error('grecaptcha is not defined.'));
+      typingEffectRunning.value = false
+      buttonDisabled.value = false
     }
-  });
-};
+  }
+  type()
+}
 
-onMounted(() => {
-  loadRecaptchaScript();
-});
-
-
-// Form data
-const formData = ref({
-  name: '',
-  email: '',
-  phone: '',
-  message: ''
-});
-
-// Reactive properties for alert
-const showAlert = ref(false);
-const alertType = ref('');
-const alertMessage = ref('');
-const typingEffectRunning = ref(false);
-
-// Send Message function
-const sendMessage = async () => {
+// Send message
+async function sendMessage() {
   buttonDisabled.value = true
-  resetState(); // Reset previous state
-
-  // Create an AbortController for timeout
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 5000); // Timeout after 3 seconds
+  showAlert.value    = false
+  alertMessage.value = ''
 
   try {
-    // Request reCAPTCHA token
-    const token = await grecaptcha.execute('6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc', { action: 'submit' });
-
-    if (!token) {
-      throw new Error('Failed to get reCAPTCHA token.');
-    }
-
-    // 'https://portfolio.valerilevinson.com/api/message'
-    //  'http://127.0.0.1:8000/api/message'
-    // Include the token in the payload
-    const response = await fetch('https://portfolio.valerilevinson.com/api/message', {
+    await loadRecaptchaScript()
+    const token = await window.grecaptcha.execute('6Lfz4qgqAAAAAJj4s5Vd7bHfsqIrhc65dsAHxOQc', { action: 'submit' })
+    const res   = await fetch('https://portfolio.valerilevinson.com/api/message', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...formData.value,
-        recaptchaToken: token, // Add reCAPTCHA token to the payload
-      }),
-      signal: controller.signal, // Attach the AbortController signal
-    });
-
-    clearTimeout(timeoutId); // Clear the timeout if the request succeeds
-
-
-    if (!response.ok) {
-      throw new Error('Failed to send message.');
-    }
-
-    const result = await response.json();
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ ...formData.value, recaptchaToken: token })
+    })
+    if (!res.ok) throw new Error('Network error')
+    alertType.value    = 'success'
     alertMessage.value = getText('contact.alerts.success')
-    alertType.value = 'success';
-  } catch (error) {
-    clearTimeout(timeoutId); // Ensure timeout is cleared in case of any error
-
-    if (error.name === 'AbortError') {
-      console.error("Request timed out:", error);
-      alertMessage.value = getText('contact.alerts.timeout')
-    } else {
-      console.error("Error in sendMessage:", error);
-      alertMessage.value = getText('contact.alerts.error')
-    }
-    alertType.value = 'error';
+  } catch (e) {
+    console.error(e)
+    alertType.value    = 'error'
+    alertMessage.value = getText('contact.alerts.error')
   }
 
-  // Invoke typing effect if needed
-  if (!typingEffectRunning.value && alertMessage.value) {
-    typingEffect();
-    //the whole point here is to close the typing effect no matter what at the end.
-    setTimeout(()=>{
-      resetState()
-      if(alertType.value === 'success'){
-        buttonDisabled.value = false
-        location.reload()
-      }
-      if(alertType.value === 'error'){
-        buttonDisabled.value = false
-      }
-    },4000)
-  }
-};
+  showAlert.value = true
+  typingEffect()
+}
 
-// Typing effect for alert message
-const typingEffect = () => {
-  if (typingEffectRunning.value) return;
-
-  typingEffectRunning.value = true;
-  const text = alertMessage.value;
-  let i = 0;
-  const speed = 80; // Typing speed
-  alertMessage.value = ''; // Clear the message to start the animation
-
-  const type = () => {
-    if (i < text.length && typingEffectRunning.value) {
-      alertMessage.value += text.charAt(i);
-      i++;
-      setTimeout(type, speed);
-    } else {
-      typingEffectRunning.value = false; // Reset flag
-    }
-  };
-
-  showAlert.value = true;
-  type();
-};
-
-// Reset state
-const resetState = () => {
-  showAlert.value = false;
-  alertMessage.value = false;
-  typingEffectRunning.value = false; // Reset typing effect state
-};
-
-// Modal close handler
-const handleClose = () => {
-  resetState();
-};
-
-
+// Close Alert
+function handleClose() {
+  showAlert.value = false
+}
 </script>
 
 <template>
-  <section class="py-10" >
-    <h2 class="text-3xl font-bold mb-8 ml-10" :dir="lang === 'he' ? 'rtl' : 'ltr'">{{ getText('contact.title') }}</h2>
+<section class="contact-me relative w-full bg-sections-contact_me rounded-md h-screen overflow-hidden border border-red-100">
+  <div   class="h-screen flex justify-around items-center gap-6 mx-auto  px-4 "
+  >
+    <!-- LEFT PANEL: Social Links -->
+    <FadeContent
+      class-name="social-panel w-1/3"
+      :blur="true"
+      :duration="800"
+      easing="ease-out"
+      :initial-opacity="0"
+      :y-offset="20"
+    >
+      <!-- <h3 class="uppercase underline mb-4">
+        {{ getText('contact.social') }}
+      </h3> -->
+      <RevealLink/>
+    </FadeContent>
 
+    <!-- RIGHT PANEL: Contact Form -->
+    <FadeContent
+      class-name="form-panel w-1/3"
+      :blur="true"
+      :duration="800"
+      easing="ease-out"
+      :initial-opacity="0"
+      :y-offset="20"
+    >
+      <p class="uppercase mb-4 text-6xl font-black whitespace-nowrap">
+        {{ getText('contact.messageTitle') }}
+      </p>
+      <form @submit.prevent="sendMessage" class="max-w-[40rem]">
 
-    <!-- Alert Modal -->
-    <div v-if="showAlert" @click="handleClose" class="fixed inset-0 bg-blur-sm flex justify-center items-center z-50">
-      <div 
-        class="border border-primary-300 border-opacity-50 p-14 rounded-md shadow-lg max-w-lg text-center" 
+        <!-- Name -->
+        <label class="block text-sm">
+          {{ getText('contact.form.name') }}
+        </label>
+        <div class="trace-input">
+          <input
+            v-model="formData.name"
+            type="text"
+            required
+            :placeholder="getText('contact.form.placeholder.name')"
+            class=""
+          />
+          <span class="trace bottom"></span>
+          <span class="trace right"></span>
+          <span class="trace top"></span>
+          <span class="trace left"></span>
+        </div>
+
+        <!-- Email -->
+        <label class="text-sm">
+          {{ getText('contact.form.email') }}
+        </label>
+        <div class="relative trace-input">
+          <input
+            v-model="formData.email"
+            type="email"
+            required
+            :placeholder="getText('contact.form.placeholder.email')"
+            class="w-full bg-opacity-20"
+          />
+          <span class="trace bottom"></span>
+          <span class="trace right"></span>
+          <span class="trace top"></span>
+          <span class="trace left"></span>
+        </div>
+
+        <!-- Phone -->
+        <label class=" text-sm">
+          {{ getText('contact.form.phone') }}
+        </label>
+        <div class="relative trace-input">
+          <input
+            v-model="formData.phone"
+            type="tel"
+            :placeholder="getText('contact.form.placeholder.phone')"
+            class="w-full"
+          />
+          <span class="trace bottom"></span>
+          <span class="trace right"></span>
+          <span class="trace top"></span>
+          <span class="trace left"></span>
+        </div>
+
+        <!-- Message -->
+        <label class="text-sm text-primary-300">
+          {{ getText('contact.form.message') }}
+        </label>
+        <div class="relative trace-input">
+          <textarea
+            v-model="formData.message"
+            rows="4"
+            required
+            :placeholder="getText('contact.form.placeholder.message')"
+            class=""
+          ></textarea>
+          <span class="trace bottom"></span>
+          <span class="trace right"></span>
+          <span class="trace top"></span>
+          <span class="trace left"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <EncryptButton
+          type="submit"
+          :disabled="buttonDisabled"
+          :targetText="getText('contact.form.button')"
+          
+        >
+          <!-- <span
+            v-if="buttonDisabled"
+            class="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"
+          />
+          {{ getText('contact.form.button') }} -->
+      </EncryptButton>
+      </form>
+    </FadeContent>
+  </div>
+    <!-- ALERT OVERLAY -->
+    <div
+      v-if="showAlert"
+      @click="handleClose"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50"
+    >
+      <div
         @click.stop
-        :class="alertType === 'error' ? 'bg-messages-error' : 'bg-messages-success' "
+        :class="[
+          'p-4 rounded-md text-center',
+          alertType === 'success'
+            ? 'bg-messages-success'
+            : 'bg-messages-error'
+        ]"
       >
-        <p class="text-xl font-pixelify font-semibold text-primary-300">{{ alertMessage }}</p>
-      </div>
-    </div>
-    <!-- alert itself-->
-    <div :class="{'blur-sm': showAlert}" class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 max-w-7xl mx-auto border border-borders-grey rounded-md p-4 bg-sections-contact_me">
-
-    <!-- First Column (Largest - acts as a title) -->
-      <div class="first_column m-2 lg:border-r border-borders-grey border-opacity-30">
-        <h3 class="uppercase underline mb-4 mt-4" :dir="lang === 'he' ? 'rtl' : 'ltr'">{{ getText('contact.social') }}</h3>
-
-        <!-- the social media buttons-->
-        <div :class="lang === 'en' ? 'flex flex-col gap-6 min-w-[350px] mt-16 ml-0' : 'flex flex-col gap-6 min-w-[350px] mt-16 mr-6'" :dir="lang === 'he' ? 'rtl' : 'ltr'">
-          <div >
-            <a target="_blank" href="https://www.linkedin.com/in/valeri-levinson-643654350/" aria-label="linkedin" class="hover:text-gray-300 text-primary-300">
-              <div class="flex gap-2 ">
-                <!-- <img src="/linkedin.svg" alt="Linkedin" class="w-6 h-6" > -->
-                <h3 class="pt-1 uppercase">{{ getText('contact.linkedin') }}</h3>
-              </div>
-              <p class="pl-3 capitalize underline">my linkedin</p>
-            </a>
-          </div>
-
-          <div class="">
-            <a href="mailto:levinsonvaleri@gmail.com" aria-label="Email" class="hover:text-gray-300 text-primary-300">
-              <div class="flex gap-2 ">
-                <!-- <img src="/email.svg" alt="email" class="w-6 h-6" > -->
-                <h3 class="pt-1 uppercase">{{ getText('contact.email') }}</h3>
-              </div>
-              <p class="pl-3">levinsonvaleri@gmail.com</p>
-            </a>
-          </div>
-
-          <!-- <div>
-            <a aria-label="facebook" class="hover:text-gray-300 text-primary-300">
-              <div class="flex gap-2 ">
-                <img src="/facebook1.svg" alt="facebook" class="w-6 h-6" >
-                <h3 class="pt-1 uppercase">facebook</h3>
-              </div>
-              <p class="pl-3 capitalize">currently no facebook</p>
-            </a>
-          </div> -->
-
-          <div class="">
-            <a  aria-label="phone call" class="hover:text-primary-300 text-primary-300">
-              <div class="flex gap-2">
-                <!-- <img src="/phone_call.svg" alt="phone call" class="w-6 h-6" > -->
-                <h3 class="pt-1 uppercase">{{ getText('contact.phone') }}</h3>
-              </div>
-              <p class="pl-3 capitalize">972-0552251273</p>
-            </a>
-          </div>
-
-          <div>
-            <a 
-              href="/valerilevinson_CV.pdf" 
-              download="CV.pdf"
-              class="hover:text-gray-300 text-primary-300">
-              <div class="flex gap-2 ">
-                <!-- <img src="/cv.svg" alt="cv_image" class="w-6 h-6" > -->
-                <h3 class="pt-1 uppercase">{{ getText('contact.cv') }}</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Second Column: Send Message -->
-      <div class="second_column ml-4 m-6" :dir="lang === 'he' ? 'rtl' : 'ltr'">
-        <h3 class="uppercase underline mb-4">{{ getText('contact.messageTitle') }}</h3>
-        <div class="space-y-4 items-center">
-          <!-- form section -->
-          <div class="max-w-lg mx-auto p-0 lg:p-6 md:p-6 shadow-md rounded-lg">
-            <form @submit.prevent="sendMessage">
-              <!-- Name -->
-              <div class="mb-4">
-                <label for="name" class="block mb-2 text-sm font-roboto text-primary-300">{{ getText('contact.form.name') }}</label>
-                <input
-                  type="text"
-                  id="name"
-                  v-model="formData.name"
-                  class="w-full border border-borders-grey bg-borders-grey bg-opacity-20 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  :placeholder="getText('contact.form.placeholder.name')"                  required
-                />
-              </div>
-
-              <!-- Email -->
-              <div class="mb-4">
-                <label for="email" class="block mb-2 text-sm font-roboto text-primary-300">{{ getText('contact.form.email') }}</label>
-                <input
-                  type="email"
-                  id="email"
-                  v-model="formData.email"
-                  class="w-full border border-borders-grey bg-borders-grey bg-opacity-20 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  :placeholder="getText('contact.form.placeholder.email')"                  required
-                />
-              </div>
-
-              <!-- Phone -->
-              <div class="mb-4">
-                <label for="phone" class="block mb-2 text-sm font-roboto text-primary-300">{{ getText('contact.form.phone') }}</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  v-model="formData.phone"
-                  :dir="lang === 'he' ? 'rtl' : 'ltr'"
-                  class="w-full border border-borders-grey bg-borders-grey bg-opacity-20 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  :placeholder="getText('contact.form.placeholder.phone')"                />
-              </div>
-
-              <!-- Message -->
-              <div class="mb-6">
-                <label for="message" class="block mb-2 text-sm font-roboto text-primary-300">{{ getText('contact.form.message') }}</label>
-                <textarea
-                  id="message"
-                  v-model="formData.message"
-                  class="w-full border border-borders-grey bg-borders-grey bg-opacity-20 p-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  :placeholder="getText('contact.form.placeholder.message')"                  rows="4"
-                  required
-                ></textarea>
-              </div>
-
-              <!-- Submit Button -->
-               <button
-               :disabled="buttonDisabled"
-                data-callback="sendMessage"
-                data-action="submit"
-                class="g-recaptcha flex justify-center gap-4 w-full bg-buttons-success bg-opacity-80 text-primary-300 py-2 px-4 rounded-md shadow-md hover:bg-buttons-success focus:ring-0 focus:ring-borders-green focus:ring-opacity-50"
-              >
-              <div v-if="buttonDisabled" class="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin">
-              </div>
-              {{ getText('contact.form.button') }}
-            </button>
-            </form>
-          </div>
-        </div>
+        <p class="font-pixelify text-primary-300">{{ alertMessage }}</p>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.blur-sm {
-  backdrop-filter: blur(8px);
+.social-panel { 
+
+ }
+.form-panel   { /* right panel overrides if needed */ }
+
+
+.trace-input {
+  position: relative;
+  margin-bottom: 1rem;
 }
+
+/* common input/textarea styles */
+.trace-input input,
+.trace-input textarea {
+  width: 100%;
+  color: #f2f2f2;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: hsla(235, 16%, 54%, 0.207);
+  padding: 0.75em 0.5em;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* remove default focus */
+.trace-input input:focus,
+.trace-input textarea:focus {
+  outline: none;
+}
+
+/* placeholder color */
+.trace-input input::placeholder,
+.trace-input textarea::placeholder {
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+/* the four animated spans */
+.trace {
+  position: absolute;
+  background-color: #fc2f70;
+  transition: transform 0.1s ease;
+}
+
+.bottom,
+.top {
+  height: 1px;
+  left: 0;
+  right: 0;
+  transform: scaleX(0);
+}
+
+.left,
+.right {
+  width: 1px;
+  top: 0;
+  bottom: 0;
+  transform: scaleY(0);
+}
+
+.bottom {
+  bottom: 0;
+  transform-origin: bottom right;
+}
+.trace-input input:focus ~ .bottom,
+.trace-input textarea:focus ~ .bottom {
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
+
+.right {
+  right: 0;
+  transform-origin: top right;
+  transition-delay: 0.05s;
+}
+.trace-input input:focus ~ .right,
+.trace-input textarea:focus ~ .right {
+  transform-origin: bottom right;
+  transform: scaleY(1);
+}
+
+.top {
+  top: 0;
+  transform-origin: top left;
+  transition-delay: 0.15s;
+}
+.trace-input input:focus ~ .top,
+.trace-input textarea:focus ~ .top {
+  transform-origin: top right;
+  transform: scaleX(1);
+}
+
+.left {
+  left: 0;
+  transform-origin: bottom left;
+  transition-delay: 0.25s;
+}
+.trace-input input:focus ~ .left,
+.trace-input textarea:focus ~ .left {
+  transform-origin: top left;
+  transform: scaleY(1);
+}
+
 </style>

@@ -28,11 +28,12 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
       >
 
       <img
-          src="/running-ninja.gif"
+          :src="index % 2 === 0 ? '/running-right.gif' : '/running-left.gif'"
           alt="Running Ninja"
           class="ninja"
+          :class="index % 2 === 0 ? 'run-right' : 'run-left'"
           :style="{ animationDelay: `${delays[index]}s` }"
-        />       
+        />     
 
         <FadeContent
           class-name="expertise-cards"
@@ -85,40 +86,54 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
 
 
 
-
 <style scoped>
-/* 1) Clip wrapper: hides the ninja when off-screen */
 .ninja-clipper {
   position: relative;
-  /* overflow: hidden; */
+  /* overflow-x: hidden;
+  overflow-y: visible; */
 }
 
-/* 2) Your card styles — no overflow here */
-.expertise-cards {
-  position: relative;
-  border: 1px solid rgba(139, 92, 246, 0.3);    /* border-borders-purple@30% */
-  border-radius: 0.5rem;                        /* rounded-lg */
-  background-color: rgba(99, 102, 241, 0.1);    /* bg-sections-what_i_do@10% */
-  padding: 2.5rem;                              /* p-10 */
-  width: 100%;
-}
-
-/* 3) Keyframes for a quick run then long pause */
-@keyframes ninja-run {
-  0%   { left: -20rem; }
-  15%  { left: calc(100% ); }
-  100% { left: calc(100% ); }
-}
-
-/* 4) The ninja itself */
+/* common ninja styling */
 .ninja {
   position: absolute;
-  top: -5rem;                              /* lift above the card */
-  left: -20rem;                            /* start fully off-screen */
-  width: 5rem;                             /* your gif width */
+  top: -5rem;
+  width: 5rem;
   pointer-events: none;
-  animation: ninja-run 30s linear infinite backwards;
+  z-index: 10;
+}
+
+/* run → right */
+@keyframes ninja-run-right {
+  0%   { left: -20rem; }
+  15%  { left: calc(100% + 20rem); }
+  100% { left: calc(100% + 20rem); }
+}
+.run-right {
+  animation: ninja-run-right 30s linear infinite backwards;
+}
+
+/* run ← left */
+@keyframes ninja-run-left {
+  0%   { left: calc(100% + 20rem); }
+  15%  { left: -20rem; }
+  100% { left: -20rem; }
+}
+.run-left {
+  top: -6.8rem;
+  width: 8rem;
+  animation: ninja-run-left 30s linear infinite backwards;
+}
+
+/* your card styling */
+.expertise-cards {
+  position: relative;
+  border: 1px solid rgba(139,92,246,0.3);
+  border-radius: 0.5rem;
+  background-color: rgba(99,102,241,0.1);
+  padding: 2.5rem;
+  width: 100%;
 }
 </style>
+
 
 

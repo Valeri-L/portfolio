@@ -86,23 +86,23 @@ const button_sx = "";
           @click="scrollTo('about-me')"
         >{{ getText('nav.about') }}</button>
       </li>
-      <li class="hideOnMobile">
+      <!-- <li class="hideOnMobile">
         <button
           :class="` ${activeButton === 'what_i_do' ? 'no-underline' : ''}`"
           @click="scrollTo('what_i_do')"
-        >{{ getText('nav.whatIDo') }}</button>
-      </li>
-      <li class="hideOnMobile">
+        >{{ getText('') }}</button>
+      </li> -->
+      <!-- <li class="hideOnMobile">
         <button
           :class="` ${activeButton === 'achievements' ? 'no-underline' : ''}`"
           @click="scrollTo('achievements')"
         >{{ getText('nav.achievements') }}</button>
-      </li>
+      </li> -->
       <li class="hideOnMobile">
         <button
           :class="` ${activeButton === 'projects' ? 'no-underline' : ''}`"
           @click="scrollTo('projects')"
-        >{{ getText('nav.projects') }}</button>
+        >{{ getText('nav.work') }}</button>
       </li>
       <li class="hideOnMobile">
         <button

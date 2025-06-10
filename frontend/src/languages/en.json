@@ -10,9 +10,9 @@
     },
     "nav": {
         "about": "About",
-        "whatIDo": "Services",
-        "achievements": "Blog",
-        "projects": "Projects",
+        "work": "Work",
+        "services": "Services",
+        "blog": "Blog",
         "contact": "Contact"
       },
       "skills": {
@@ -39,7 +39,7 @@
           ]
         },
         "projects": {
-  "title": "My Projects",
+  "title": "My Work",
   "list": [
     {
       "folder": "tickettracker",
