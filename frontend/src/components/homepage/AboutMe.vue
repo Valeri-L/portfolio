@@ -148,7 +148,7 @@ const processedParagraphs = computed(() => {
     >
   <div class="sliding-gradient inset-0"></div>
     <div class="aboutMeContext">
-      <h1 class="capitalize h-16 overflow-hidden flex items-center mb-10">
+      <h1 class="capitalize h-16 overflow-hidden flex items-center">
         {{ displayText }}<span class="typing-cursor ml-1"></span>
       </h1>
       <div v-for="(segments, pIndex) in processedParagraphs" :key="pIndex" class="mb-6">
@@ -165,7 +165,7 @@ const processedParagraphs = computed(() => {
               :speed="2.5"
               baseColor="rgba(255, 255, 255, 0.8)" 
               shineColor="rgba(223, 160, 240, 0.8)"
-              className="inline-block text-[1.3rem]"
+              className="shiny-text-class inline-block"
             />
           </template>
         </p>
@@ -248,9 +248,16 @@ const processedParagraphs = computed(() => {
 .aboutMeContext {
   color: #f2f2f2;
   z-index: 999;
-  padding: 4rem 6rem;
   animation: slideFromLeft 1.2s ease-in-out;
+  margin: 6rem 1rem 0rem 1rem ;
+
+  
+  h1 {
+    margin-bottom: 1.2rem;
+  };
 }
+
+
 
 .typing-cursor {
   display: inline-block;
@@ -269,5 +276,20 @@ const processedParagraphs = computed(() => {
     opacity: 0;
   }
 }
+
+.shiny-text-class {
+
+}
+
+@media (min-width:1024px) {
+  .shiny-text-class {
+    font-size: 1.3rem;
+}
+
+.aboutMeContext {
+  padding: 4rem 6rem;
+  }
+}
+
 
 </style>

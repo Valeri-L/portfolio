@@ -14,14 +14,12 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
   <header class="fixed top-0 left-0 w-full z-10">
     <NavigationBar />
   </header>
-  <!-- px-0 md:px-10 lg:px-20 md:p-0 -->
-  <!-- Content of the page -->
   <!-- About Me Section -->
-  <section id="about-me" class="about-me-section h-screen mt-[12rem] mx-[8rem] bg-primary-200">
+  <section id="about-me" class="about-me-section h-screen bg-primary-200">
     <AboutMe />
   </section>
 
-  <div  class="bg-primary-200 flex flex-col  shadow-lg mx-[8rem] relative overflow-hidden"
+  <div  class="all-sections bg-primary-200 flex flex-col  shadow-lg relative overflow-hidden"
     >
 
 
@@ -49,7 +47,25 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
 
 <style scoped>
 .about-me-section {
-  /* Allow any child to overflow beyond the 8rem gutters */
-  overflow: visible !important;
+
+  
 }
+
+@media (min-width:1024px) {
+  
+  .about-me-section {
+    margin: 0rem 8rem;
+  }
+
+  .all-sections {
+    margin: 0rem 8rem;
+}
+
+}
+
+.all-sections {
+
+}
+
+
 </style>

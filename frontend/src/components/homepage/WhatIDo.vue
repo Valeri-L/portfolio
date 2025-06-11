@@ -13,7 +13,7 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
 <template>
   <section class="what-i-do-section">
     <h2
-      class="text-4xl text-center mb-8 ml-10"
+      class=""
       :dir="lang === 'he' ? 'rtl' : 'ltr'"
     >
       {{ sectionTitle }}
@@ -133,6 +133,23 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
   padding: 2.5rem;
   width: 100%;
 }
+
+/* text-4xl text-center mb-8 ml-10 */
+
+.what-i-do-section {
+  
+}
+
+@media (min-width:1024px) {
+  .what-i-do-section {
+    
+    .h2 {
+      font-size: .4rem;
+    }
+  }
+
+}
+
 </style>
 
 

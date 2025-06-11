@@ -9,7 +9,7 @@ const colors = {
       400:"#2E2E2E", //input fields
   },
   red:{
-    100:#fc2f70,
+      100:"#fc2f70",
   },
   borders:{
       green:"#86c232",
