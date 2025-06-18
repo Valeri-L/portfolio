@@ -238,6 +238,7 @@ const processedParagraphs = computed(() => {
 }
 
 .sliding-gradient {
+  
   position: absolute;
   background-color: rgba(199, 120, 221, 0.15);
   border: 3px solid rgba(199, 120, 221, 0.15);
@@ -246,10 +247,11 @@ const processedParagraphs = computed(() => {
 }
 
 .aboutMeContext {
+  
   color: #f2f2f2;
   z-index: 999;
   animation: slideFromLeft 1.2s ease-in-out;
-  margin: 6rem 1rem 0rem 1rem ;
+  margin: 1rem 2rem 0rem 2rem ;
 
   
   h1 {
@@ -286,10 +288,10 @@ const processedParagraphs = computed(() => {
     font-size: 1.3rem;
 }
 
-.aboutMeContext {
-  padding: 4rem 6rem;
+  .aboutMeContext {
+    padding: 4rem 6rem;
+    }
   }
-}
 
 
 </style>

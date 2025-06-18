@@ -13,13 +13,13 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
 <template>
   <section class="what-i-do-section">
     <h2
-      class=""
+      class="mb-6 px-4"
       :dir="lang === 'he' ? 'rtl' : 'ltr'"
     >
       {{ sectionTitle }}
     </h2>
 
-    <div class="flex flex-col gap-8">
+    <div class="section_container">
       <!-- yOffset="2" -->
       <div
         v-for="(item, index) in whatIDoItems"
@@ -50,36 +50,37 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
           class="flex flex-col"
           :class="{ 'border-none': index === whatIDoItems.length - 1 }"
         >
-          <div
-            class="flex flex-row justify-between items-start"
-            :class="{ 'flex-row-reverse text-left': index % 2 === 1 }"
-          >
-            <!-- Text block -->
-            <div class="flex flex-col max-w-[50rem]">
-              <h3
-                class="font-semibold text-primary-300 text-start mb-[2rem]"
-                :dir="lang === 'he' ? 'rtl' : 'ltr'"
-              >
-                {{ item.title }}
-              </h3>
-              <ScrollReveal
-                :text="item.text"
-                class="w-full"
-              />
-            </div>
-
-            <!-- handling the gif/video  -->
-            <component
-              :is="item.image.endsWith('.mp4') ? 'video' : 'img'"
-              :src="`/what_i_do/${item.image}`"
-              v-bind="item.image.endsWith('.mp4') 
-                ? { autoplay: true, muted: true, loop: true, class: 'h-60 object-contain mb-4' } 
-                : { alt: item.title, class: 'h-60 object-contain mb-4' }"
+        <div
+          class="text_image_container"
+          :class="{ 'flex-row-reverse text-left': index % 2 === 1 }"
+        >
+        
+        <!-- Text block -->
+        <div class="flex flex-col max-w-[50rem]">
+          <h3
+            class="font-semibold text-primary-300 text-start mb-2 underline"
+            :dir="lang === 'he' ? 'rtl' : 'ltr'"
+            >
+            {{ item.title }}
+          </h3>
+          <ScrollReveal
+            :text="item.text"
+            class="w-full"
             />
           </div>
-        </div>
-      </FadeContent>
-    </div>
+
+          <!-- handling the gif/video that inside the card -->
+          <component
+            :is="item.image.endsWith('.mp4') ? 'video' : 'img'"
+            :src="`/what_i_do/${item.image}`"
+            v-bind="item.image.endsWith('.mp4') 
+              ? { autoplay: true, muted: true, loop: true, class: 'gif_component' } 
+              : { alt: item.title, class: 'gif_component' }"
+          />
+            </div>
+          </div>
+        </FadeContent>
+      </div>
     </div>
   </section>
 </template>
@@ -140,15 +141,62 @@ const delays = whatIDoItems.value.map(() => Math.random() * 30)
   
 }
 
+.section_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+}
+
+.text_image_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1.2rem;
+    /* flex flex-row justify-between items-start */
+  }
+
+  
+.gif_component {
+  height: auto;
+  object-fit: contain;
+  /* margin-bottom: 2rem; */
+  /* h-60 object-contain mb-4 */
+}
+
+/* DESKTOP WIDTH HANDLING */
 @media (min-width:1024px) {
-  .what-i-do-section {
-    
+  .what-i-do-section {    
     .h2 {
       font-size: .4rem;
     }
   }
 
+  .text_image_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1.2rem;
+    /* flex flex-row justify-between items-start */
+  }
+
+  .section_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+  }
+  .gif_component {
+    height: 12rem;
+    object-fit: contain;
+    margin-bottom: 4rem;
+    /* h-60 object-contain mb-4 */
+  }
+
 }
+
 
 </style>
 

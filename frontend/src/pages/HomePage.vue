@@ -15,11 +15,11 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     <NavigationBar />
   </header>
   <!-- About Me Section -->
-  <section id="about-me" class="about-me-section h-screen bg-primary-200">
+  <section id="about-me" class="about-me-section pb-[6rem] pt-[6rem] bg-primary-200">
     <AboutMe />
   </section>
 
-  <div  class="all-sections bg-primary-200 flex flex-col  shadow-lg relative overflow-hidden"
+  <div  class="all-sections bg-primary-200 flex flex-col gap-[6rem] shadow-lg relative overflow-hidden"
     >
 
 
@@ -29,7 +29,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="pt-[20rem]">
+    <section id="projects" class="">
       <Projects />
     </section>
 
