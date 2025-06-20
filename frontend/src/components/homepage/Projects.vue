@@ -47,20 +47,17 @@ const sectionTitle = computed(() => getText('projects.title'))
         class="max-w-[140rem] w-full mx-auto"
       >
         <SwiperSlide v-for="(item, index) in projects" :key="index">
-          <div class="flex flex-col mx-10 mb-10 h-auto items-center justify-between">
-            <div class="relative w-full h-[500px] md:h-[500px] flex justify-center items-center overflow-visible mb-6">
-              <img 
-                v-for="(img, imgIndex) in item.images"
-                :key="imgIndex"
-                :src="`/projects/${item.folder}/${img}`"
-                :alt="`Image ${imgIndex+1}`"
-                :class="[
-                  'h-[18rem] absolute md:static w-auto md:w-auto rounded-lg border border-gray-400 transition-transform duration-300 ',
-                  imgIndex === 0 ? 'md:translate-x-[50px] md:translate-y-[42px]' : '',
-                  imgIndex === 1 ? 'md:translate-x-[16px] md:translate-y-[-46px]' : '',
-                  imgIndex === 2 ? 'md:translate-x-[-170px] md:translate-y-[90px]' : '',
-                ]"
-              />
+          <div class="flex flex-col mx-10 mb-10 items-center justify-between">
+            <div class="relative w-full flex justify-center items-center overflow-visible mb-6">
+              <div class="image-wrapper">
+                <img
+                  v-for="(img, imgIndex) in item.images"
+                  :key="imgIndex"
+                  :src="`/projects/${item.folder}/${img}`"
+                  :alt="`Image ${imgIndex+1}`"
+                  :class="['image', `img-${imgIndex}`]"
+                />
+              </div>
             </div>
 
             <div>
@@ -87,6 +84,54 @@ const sectionTitle = computed(() => getText('projects.title'))
 </template>
 
 <style scoped>
+/* 1) Default (mobile/tablet) */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  margin-bottom: 1.5rem;
+}
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  transition: transform 0.3s;
+  position: static;
+}
+/* hide all except the zero-index */
+.img-1,
+.img-2 {
+  display: none;
+}
+/* 2) Desktop overrides */
+@media (min-width: 1024px) {
+  .image-wrapper {
+    height: 500px;
+  }
+  .image {
+    width: auto;
+    height: 14rem;
+    position: absolute;
+  }
+
+  /* per-image offsets */
+  .img-0 { transform: translate(15rem, 8.2rem); }
+  .img-1 { transform: translate(1.6rem, 1.6rem); }
+  .img-2 { transform: translate(-17rem, 9rem); }
+  
+  .img-1,
+  .img-2 {
+    display: block;
+  
+}
+}
+
   .swiper-pagination {
     margin-top: 20px;
     text-align: center;

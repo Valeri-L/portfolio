@@ -34,7 +34,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="mt-40">
+    <section id="skills" class="">
       <Skills />
     </section>
 
