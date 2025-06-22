@@ -98,7 +98,7 @@ const filteredNames = computed(() => {
 
 <style scoped>
 .skills-section {
-  height: 100vh;
+  max-height: 50rem;
 }
 
 .nav-animated-list-wrapper {

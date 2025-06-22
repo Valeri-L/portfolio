@@ -93,37 +93,35 @@ function handleClose() {
 </script>
 
 <template>
-<section class="contact-me relative w-full bg-sections-contact_me rounded-md h-screen overflow-hidden border border-red-100">
-  <div   class="h-screen flex justify-around items-center gap-6 mx-auto  px-4 "
+<section     class="contact-me relative w-full bg-sections-contact_me rounded-md overflow-hidden">
+  <div class="left-right-panel-wrapper "
   >
     <!-- LEFT PANEL: Social Links -->
+    <!-- :y-offset="20" -->
     <FadeContent
-      class-name="social-panel w-1/3"
+      class-name="social-panel"
       :blur="true"
       :duration="800"
-      easing="ease-out"
       :initial-opacity="0"
-      :y-offset="20"
-    >
-      <!-- <h3 class="uppercase underline mb-4">
-        {{ getText('contact.social') }}
-      </h3> -->
+      easing="ease-out"
+      >
       <RevealLink/>
     </FadeContent>
 
     <!-- RIGHT PANEL: Contact Form -->
     <FadeContent
-      class-name="form-panel w-1/3"
+      class-name="form-panel"
       :blur="true"
       :duration="800"
       easing="ease-out"
       :initial-opacity="0"
       :y-offset="20"
     >
-      <p class="uppercase mb-4 text-6xl font-black whitespace-nowrap">
+      <p class="right-panel-header">
         {{ getText('contact.messageTitle') }}
       </p>
-      <form @submit.prevent="sendMessage" class="max-w-[40rem]">
+      <div class="form-wrapper ">
+      <form @submit.prevent="sendMessage" class="max-w-[35rem] ">
 
         <!-- Name -->
         <label class="block text-sm">
@@ -203,13 +201,9 @@ function handleClose() {
           :targetText="getText('contact.form.button')"
           
         >
-          <!-- <span
-            v-if="buttonDisabled"
-            class="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"
-          />
-          {{ getText('contact.form.button') }} -->
       </EncryptButton>
       </form>
+    </div>
     </FadeContent>
   </div>
     <!-- ALERT OVERLAY -->
@@ -234,12 +228,53 @@ function handleClose() {
 </template>
 
 <style scoped>
-.social-panel { 
 
- }
-.form-panel   { /* right panel overrides if needed */ }
+.contact-me {
+  border: 1.2px solid #fc2f70;
+  margin-top: 2rem;
+}
+
+.left-right-panel-wrapper {
+  display: flex;
+  flex-direction: column;       /* stack on mobile/tablet */
+  justify-content: space-between;
+  gap: 2rem;                    /* spacing between panels */
+  margin: 2rem 1rem;            /* narrow gutters */
+
+}
+
+.social-panel {
+  border-bottom: .02rem solid #fc2f70;
+  padding-bottom:1.5rem;
+}
+
+.right-panel-header {
+  @apply uppercase mb-4 text-[2.5rem] font-[900] leading-[1.2] 
+}
+
+/* desktop only: side-by-side + wider gutters */
+@media (min-width: 1124px) {
 
 
+  .left-right-panel-wrapper {
+    flex-direction: row;
+    margin: 2rem 6rem;          /* match your desktop mx-[8rem] */
+  }
+  .social-panel,
+  .form-panel {
+    flex: 1;                    /* equal widths */
+    border:none;
+  }
+  .social-panel {
+    margin-right: 2rem;         /* gutter between columns */
+  }
+
+  .right-panel-header {
+    @apply uppercase mb-4 text-[3.6rem] font-[900] leading-[1.2] 
+  }
+}
+
+/* preserve your input “trace” effect as-is */
 .trace-input {
   position: relative;
   margin-bottom: 1rem;
@@ -335,5 +370,6 @@ function handleClose() {
   transform-origin: top left;
   transform: scaleY(1);
 }
+
 
 </style>

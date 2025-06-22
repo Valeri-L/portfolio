@@ -26,7 +26,8 @@
   <style scoped>
   .reveal-links {
     display: grid;
-    place-content: center;
+    place-content: start;
+    justify-content: start;
 
 
     

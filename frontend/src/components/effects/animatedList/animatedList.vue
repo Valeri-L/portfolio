@@ -148,7 +148,8 @@
   }
   .gradient.bottom {
     bottom: 0;
-    /* background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); */
+    margin: 0rem 2rem 0rem 2rem;
+    /* background: linear-gradient(to top, rgba(0,0,0,0.2), transparent); */
   }
   </style>
   

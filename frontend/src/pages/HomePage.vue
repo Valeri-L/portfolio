@@ -39,7 +39,7 @@ import WhatIDo from '../components/homepage/WhatIDo.vue';
     </section>
 
     <!-- Contact Me Section -->
-    <section id="contact-me" class="h-screen">
+    <section id="contact-me" class="">
       <ContactMe />
     </section>
   </div>

@@ -82,19 +82,8 @@
   </script>
   
   <style scoped>
-  .flip-link-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: 2rem;
-    position: relative;
-    overflow: visible;
-  }
   
-  .action-icon {
-    font-size: 0.875rem;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out 0.3s;
-  }
+
   .flip-link-wrapper:hover .action-icon {
     opacity: 1;
   }
@@ -113,18 +102,61 @@
     z-index: 10;
   }
   
-  /* Flip animation */
+  .action-icon {
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out 0.3s;
+    }
+
+  .flip-link-wrapper {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      overflow: visible;
+    }
+
   .flip-link {
     position: relative;
     overflow: hidden;
     display: inline-block;
     font-weight: 900;
-    font-size: 3.6rem;
-    line-height: 1.2;
+    font-size: 2.5rem;
+    line-height: 1.6;
     color: currentColor;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
   }
+
+  /* Flip animation */
+  @media (min-width: 1124px) {
+    .action-icon {
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out 0.3s;
+      /* margin-left: 1.1rem; */
+    }
+
+    .flip-link-wrapper {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    .flip-link {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      font-weight: 900;
+      font-size: 3.6rem;
+      line-height: 1.2;
+      color: currentColor;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+
   .flip-link .line {
     display: flex;
     white-space: nowrap;
