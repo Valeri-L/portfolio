@@ -1,0 +1,115 @@
+{
+    "aboutMe": {
+      "title": "About Me",
+      "name": "Valeri Levinson",
+      "paragraphs": [
+        "**Hi, I'm Valeri**. I'm a Full-Stack Developer with a strong focus on **backend systems, SaaS architecture**, and **networking-integrated applications**. I specialize in **Python, FastAPI, Django, Next.js**, and modern technologies like **Docker** and **AWS**. Based in Bat-Yam, Israel, I bring hands-on experience in both **full-stack development** and **enterprise networking**.",
+        "I'm passionate about building **scalable, intuitive** web platforms—particularly in the **CRM** and **ticketing** space. I thrive on creating **impactful** backend systems, crafting **thoughtful** interfaces, and solving **real-world challenges** through clean, purpose-driven code.",
+        "In my free time, I enhance my skills by learning new technologies, and developing production-ready tools like my live **Ticket Manager** app. I'm currently working on expanding it with **premium SaaS features**, and preparing to open-source a full **CRM platform** later this year."
+      ]
+    },
+    "nav": {
+        "about": "About",
+        "work": "Work",
+        "services": "Services",
+        "blog": "Blog",
+        "contact": "Contact"
+      },
+      "skills": {
+        "title":"My Tech Stack"
+      },
+        "whatIDo": {
+          "title": "My Specializations",
+          "items": [
+            {
+              "image": "room.mp4",
+              "title": "Full Stack Development",
+              "text": "I build and deploy production-grade web applications from end to end. On the frontend, I use Figma for UI/UX design and Next.js (React) with Material UI and Bootstrap to create responsive and visually engaging interfaces.On the backend, I work with FastAPI and Django to develop scalable APIs, backed by both SQL and NoSQL databases.I leverage Docker, GitHub Actions, and AWS to ensure reliable, automated deployments and secure cloud infrastructure."
+            },
+            {
+              "image": "matrix.gif",
+              "title": "backend development",
+              "text":"I create high-performance backends that prioritize efficiency, security, and maintainability.My expertise includes designing optimized schemas, developing RESTful APIs, implementing middleware, and writing unit tests to ensure system reliability.I'm proficient in Django and FastAPI, with deep knowledge of SQL and NoSQL systems—tailoring each backend precisely to the project’s needs."
+            },
+            {
+              "image": "security.gif",
+              "title": "Networking & Security",
+              "text": "With hands-on experience as a networking engineer, I design and secure robust network infrastructures to support scalable applications.My skill set includes firewall configuration (Cisco, Fortinet, Check Point, Juniper), DNS management, and implementing secure communication channels.Using AWS, I manage cloud-based environments with a focus on resilience, scalability, and cost efficiency for modern applications"
+            }
+          ]
+        },
+        "projects": {
+  "title": "My Work",
+  "list": [
+    {
+      "folder": "tickettracker",
+      "images": ["ticket_1.png", "ticket_2.png", "ticket_test.png"],
+      "title": "Ticket Manager",
+      "text": "Fullstack web application designed to help organizations efficiently manage their operational tasks through an intuitive ticketing system.",
+      "buttons": [
+        { "button_text": "visit application", "url": "https://ticket-tracker.valar.software" }
+      ]
+    },
+    {
+      "folder": "crm",
+      "images": ["crm_1.png", "crm_2.png", "crm_3.png"],
+      "title": "Valar CRM",
+      "text": "A free Customer Relationship Management (CRM) portal tailored for small businesses. Designed for simplicity, security, and speed, it features an intuitive user interface and visually appealing graphical insights. Coming Public Soon...",
+      "buttons": [
+      ]
+    },
+    {
+      "folder": "weatherapp",
+      "images": ["weather_1.png", "weather_2.png", "weather_3.png"],
+      "title": "Weather API Comparison",
+      "text": "A Weather API Comparison application that highlights discrepancies between two forecasting APIs, demonstrating how online data can sometimes be inaccurate.",
+      "buttons": [
+        { "button_text": "view on GIT", "url": "https://github.com/valeri-l/weather_representation" }
+      ]
+    },
+    {
+      "folder": "topdown",
+      "images": ["topdown_2.jpg", "topdown_3.jpg", "fighter_test.png"],
+      "title": "Top Down Fighter",
+      "text": "A top-down fighter game featuring smooth FPS handling, intense battles against monsters and bosses, brought to life with beautifully crafted pixel art assets. documentation is coming soon.",
+      "buttons": [
+        
+      ]
+    }
+  ]
+},
+"achievements": {
+  "title":"Achievements"
+},
+"contact": {
+  "title": "Contact Me",
+  "social": "social media",
+  "email": "email",
+  "linkedin": "Linkedin",
+  "phone": "phone number",
+  "cv": "View My CV",
+  "messageTitle": "leave a message",
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "Message",
+    "placeholder": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "phone": "Your Phone",
+      "message": "Your Message"
+    },
+    "button": "Send Message"
+  },
+  "alerts": {
+    "success": "Message sent successfully!",
+    "error": "An error occurred. Please try again.",
+    "timeout": "Server is unreachable. Please try again later."
+  }
+}
+
+
+      
+  }
+  
