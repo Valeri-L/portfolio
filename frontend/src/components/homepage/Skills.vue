@@ -63,7 +63,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useLanguage } from '../../composables/useLanguage'
-import AnimatedList from '../effects/animatedList/AnimatedList.vue'
+import AnimatedList from '../effects/animatedList/animatedList.vue'
 
 const { lang, getText } = useLanguage()
 
