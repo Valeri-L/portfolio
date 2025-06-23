@@ -45,7 +45,7 @@ const scrollTo = (section) => {
   }
 };
 
-const button_sx = "";
+
 </script>
 
 <template>
@@ -55,8 +55,8 @@ const button_sx = "";
     
       <div class="flex mr-auto">
       <li class="">
-        <div class="text-xl h-[100%] w-[12rem]">
-          <button :class="button_sx" @click="scrollTo('about-me')">{{ getText('aboutMe.name') }}</button><!-- logo on the top left side -->
+        <div class="text-xl h-[100%]">
+          <button class="top-left-dev-name" @click="scrollTo('about-me')">{{ getText('aboutMe.name') }}</button><!-- logo on the top left side -->
         </div>
       </li>
 
@@ -134,21 +134,21 @@ const button_sx = "";
         <button
           :class="`${button_sx} ${activeButton === 'about' ? 'no-underline' : ''}`"
           @click="scrollTo('about-me');closeBtn()"
-        >About Me</button>
+        >{{ getText('nav.about') }}</button>
       </li>
       <li>
         <button
-          :class="`${button_sx} ${activeButton === 'what_i_do' ? 'no-underline' : ''}`"
-          @click="scrollTo('what_i_do');closeBtn()"
-        >What I Do</button>
+          :class="`${button_sx} ${activeButton === 'projects' ? 'no-underline' : ''}`"
+          @click="scrollTo('projects');closeBtn()"
+        >{{ getText('nav.work') }}</button>
       </li>
       <li>
         <button
-          :class="`${button_sx} ${activeButton === 'achievements' ? 'no-underline' : ''}`"
-          @click="scrollTo('achievements');closeBtn()"
-        >Achievements</button>
+          :class="`${button_sx} ${activeButton === 'contact' ? 'no-underline' : ''}`"
+          @click="scrollTo('contact-me');closeBtn()"
+        >{{ getText('nav.contact') }}</button>
       </li>
-      <li>
+      <!-- <li>
         <button
           :class="`${button_sx} ${activeButton === 'projects' ? 'no-underline' : ''}`"
           @click="scrollTo('projects');closeBtn()"
@@ -159,7 +159,7 @@ const button_sx = "";
           :class="`${button_sx} ${activeButton === 'contact' ? 'no-underline' : ''}`"
           @click="scrollTo('contact-me');closeBtn()"
         >Contact Me</button>
-      </li>
+      </li> -->
     </ul>
   </nav>
 
@@ -256,7 +256,11 @@ const button_sx = "";
     height: 100%;
     
   }
-
+  @media(min-width :375px) {
+    .top-left-dev-name {
+      width: 12rem;
+    }
+  }
 
 
   @media(max-width :930px) {
@@ -274,5 +278,12 @@ const button_sx = "";
     }
   }
 
+  @media (max-width: 375px) {
+  /* target the first <li> (your “Valeri Levinson” button) */
+    .top-left-dev-name {
+      font-size: 0.875rem;
+      width: 9rem;
+    }
+  }
 
 </style>

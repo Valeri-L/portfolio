@@ -148,7 +148,7 @@ const processedParagraphs = computed(() => {
     >
   <div class="sliding-gradient inset-0"></div>
     <div class="aboutMeContext">
-      <h1 class="capitalize h-16 overflow-hidden flex items-center">
+      <h1 class="capitalize h-17 overflow-hidden flex items-center">
         {{ displayText }}<span class="typing-cursor ml-1"></span>
       </h1>
       <div v-for="(segments, pIndex) in processedParagraphs" :key="pIndex" class="mb-6">
