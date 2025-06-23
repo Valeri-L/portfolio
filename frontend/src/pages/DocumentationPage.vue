@@ -1,27 +1,27 @@
-<!-- <script setup>
-    import { shallowRef, watch } from 'vue';
-    import { useRoute } from 'vue-router';
+<script setup>
+    // import { shallowRef, watch } from 'vue';
+    // import { useRoute } from 'vue-router';
 
-    import DocCRM from './documentation_componenets/DocCRM.vue';
-    import DocTopDown from './documentation_componenets/DocTopDown.vue';
-    import DocNavigationBar from './documentation_componenets/DocNavigationBar.vue';
-    import NotFound from './documentation_componenets/NotFound.vue';
-    import InDevelopment from './error_componenets/InDevelopment.vue';
+    // import DocCRM from './documentation_componenets/DocCRM.vue';
+    // import DocTopDown from './documentation_componenets/DocTopDown.vue';
+    // import DocNavigationBar from './documentation_componenets/DocNavigationBar.vue';
+    // import NotFound from './documentation_componenets/NotFound.vue';
+    // import InDevelopment from './error_componenets/InDevelopment.vue';
 
-    // Map the parameter to specific components
-    const documentationComponents = {
-        valar_crm: DocCRM, // DocCRM,
-        top_down: DocTopDown, //DocTopDown,
-        weather_api: InDevelopment, //DocWeatherAPI,
-      };
+    // // Map the parameter to specific components
+    // const documentationComponents = {
+    //     valar_crm: DocCRM, // DocCRM,
+    //     top_down: DocTopDown, //DocTopDown,
+    //     weather_api: InDevelopment, //DocWeatherAPI,
+    //   };
     
-    const route = useRoute(); 
-    const component = shallowRef(documentationComponents[route.params.project] || NotFound);
+    // const route = useRoute(); 
+    // const component = shallowRef(documentationComponents[route.params.project] || NotFound);
     
-    watch(() => route.params.project, (newProject) => {
-        component.value = documentationComponents[newProject] || null;
-    });
-</script> -->
+    // watch(() => route.params.project, (newProject) => {
+    //     component.value = documentationComponents[newProject] || null;
+    // });
+</script>
 
 
 <!-- <template>
