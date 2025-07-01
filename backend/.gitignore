@@ -1,2 +1,43 @@
+# Python bytecode and caches
+backend/__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Virtual environment
+backend/venv/
+venv/
+env/
+
+# Django-specific
+*.sqlite3
+db.sqlite3
+backend/staticfiles/
+backend/media/
+backend/.env
+
+# Migrations (optional: keep if collaborating)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+# Uncomment to ignore migration files entirely (not recommended for team projects)
+# **/migrations/
+
+# Django secret files
+*.secret
+*.pem
+*.key
+
+# Logs
+backend/*.log
+
+# Editor/IDE configs
+backend/.idea/
+backend/.vscode/
+
+# ==========================
+# == ROOT PROJECT LEVEL ==
+# ==========================
+*.env
+.env.local
 .env
-/.env
+*.bak
+*.tmp
