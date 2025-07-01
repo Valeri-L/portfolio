@@ -52,3 +52,4 @@ jobs:
             docker system prune -f
             docker compose pull
             docker compose up -d
+            docker restart webserver
